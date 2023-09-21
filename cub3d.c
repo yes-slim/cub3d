@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/21 22:53:08 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:15:34 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	player_move(int keycode, t_init *init)
 	if (keycode == 65307)
 		ft_exit(init);
 	if (keycode == 119) //w
-		if (init->py - 4 >= 0 && init->map[(init->py-4)/cell][init->px/cell] == '0')
+		if (init->py - 4 >= 0 && init->map[(init->py-4)/cell][init->px/cell] == '0' && init->map[(init->py-4)/cell][(init->px+12)/cell] == '0')
 			init->py -= 4;
 	if (keycode == 115) //s
-		if (init->py + 4 <= init->mh * cell && init->map[(init->py+4+12)/cell][init->px/cell] == '0')
+		if (init->py + 4 <= init->mh * cell && init->map[(init->py+4+12)/cell][init->px/cell] == '0'&& init->map[(init->py+4+12)/cell][(init->px+12)/cell] == '0')
 			init->py += 4;
 	if (keycode == 100) //d
 		if (init->px + 4 <= init->mw * cell && init->map[init->py/cell][(init->px+4+12)/cell] == '0')
