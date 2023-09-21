@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/21 15:00:08 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:14:48 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,46 +24,27 @@ int	moves_count(int keycode, t_init *init)
 		ft_exit(init);
 	return (0);
 }
+int	mouse_move(t_init *init)
+{
+
+	return (0);
+}
+
+void	ft_hook(t_init *init)
+{
+	mlx_hook(init->win, 2, 1L<<0, moves_count, init);
+	mlx_hook(init->win, 17, 0, ft_exit, init);
+	// mlx_hook(init->win, , mouse_move, init);
+}
 
 char **get_map(void)
 {
-	// const char *map="1111111111111111 1000110110111101 1000000000000001 1000000000000001 1000000000000001 1000000000000001 1001101110010001 1111111111111111";
-	const char *map="1";
+	const char *map="1111111111111111 1000110110111101 1000000000000001 1000000000000001 1000000000000001 1000000000000001 1001101110010001 1111111111111111";
 	return (_split(map, ' '));
 }
 
 void	draw_map(t_init *init)
 {
-	int x=0, y=0;
-	int i=0, j=0;
-	// while (init->map[i])
-	// {
-	// 	j = 0;
-	// 	while (init->map[i][j])
-	// 	{
-			while (y <= init->screenHeight)
-			{
-				x = 0;
-				while (x <= init->screenWidth)
-				{
-					int i = x/32;
-					int j = y/32;
-					printf("i=%d, j=%d\n", i, j);
-					if (!(x%32) || !(y%32))
-						mlx_pixel_put(init->mlx, init->win, x, y, 0xFF0000);
-					else if (init->map[j][i] == 1)
-						mlx_pixel_put(init->mlx, init->win, x, y, 0x0093FF);
-					else if (init->map[j][i] == 0)
-						mlx_pixel_put(init->mlx, init->win, x, y, 0xFF0000);
-					x++;
-				}
-				y++;
-			}
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	printf("finish map\n");
 }
 
 int main(int ac, char **av)
@@ -71,16 +52,10 @@ int main(int ac, char **av)
 	t_init	*init = malloc(sizeof(t_init));
 	
 	init->map = get_map();
-	int i=0; while (init->map[i++]);
-	init->screenHeight = --i * 32;
-	init->screenWidth = strlen(init->map[0]) * 32;
-	printf("%d, %d\n", init->screenWidth, init->screenHeight);
 	init->mlx = mlx_init();
-	init->win = mlx_new_window(init->mlx, init->screenWidth, init->screenHeight, "Cub3d");
-	init->img = mlx_new_image(init->mlx, init->screenWidth, init->screenHeight);
+	init->win = mlx_new_window(init->mlx, screenWidth, screenHeight, "Cub3d");
 	draw_map(init);
-	mlx_hook(init->win, 2, 1L<<0, moves_count, init);
-	mlx_hook(init->win, 17, 0, ft_exit, init);
+	ft_hook(init);
 	mlx_loop(init->mlx);
 }
 					  		         
