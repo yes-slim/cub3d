@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/21 21:13:41 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:20:56 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 # include <limits.h>
 # include <unistd.h>
 # include <string.h>
+# include <math.h>
 
 # define cell 32
-# define screenHeight 512
-# define screenWidth 1024
-// # define 
+# define screen_hei 512
+# define screen_wid 1024
+// # define  
 // # define 
 // # define 
 typedef struct s_init
@@ -32,6 +33,11 @@ typedef struct s_init
 	void	*mlx;
 	void	*win;
 	char	**map;
+	void	*pl;
+	int		px;
+	int 	py;
+	int		mh;
+	int		mw;
 }	t_init;
 
 
@@ -39,5 +45,5 @@ typedef struct s_init
 // void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 /*****libft****/
 char	**_split(char const *s, char c);
-
+void	draw_map(t_init *init);
 #endif
