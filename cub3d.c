@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/21 22:49:39 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:53:08 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int main(int ac, char **av)
 	init->py = (init->mh * cell / 2) - cell / 2 - 6, init->px = (init->mw * cell / 2) -6;
 	init->mlx = mlx_init();
 	init->win = mlx_new_window(init->mlx, screen_wid, screen_hei, "Cub3d");
-	init->pl = mlx_xpm_file_to_image(init->mlx, "./player.xpm", &h, &w);
+	init->pl = mlx_xpm_file_to_image(init->mlx, "./raycasting/player.xpm", &h, &w);
 	draw_map(init);
 	ft_hook(init);
 	mlx_loop(init->mlx);
