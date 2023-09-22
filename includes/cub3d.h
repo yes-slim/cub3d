@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/18 21:40:51 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:20:56 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,30 @@
 # include <limits.h>
 # include <unistd.h>
 # include <string.h>
+# include <math.h>
 
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
+# define cell 32
+# define screen_hei 512
+# define screen_wid 1024
+// # define  
+// # define 
+// # define 
 typedef struct s_init
 {
-	int		screenHeight;
-	int		screenWidth;
 	void	*mlx;
 	void	*win;
 	char	**map;
-	void	*img;
+	void	*pl;
+	int		px;
+	int 	py;
+	int		mh;
+	int		mw;
 }	t_init;
 
 
 /*****minilibx****/
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+// void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 /*****libft****/
 char	**_split(char const *s, char c);
-
+void	draw_map(t_init *init);
 #endif
