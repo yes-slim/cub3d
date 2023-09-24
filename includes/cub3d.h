@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/21 22:20:56 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:22:34 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,23 @@
 # define cell 32
 # define screen_hei 512
 # define screen_wid 1024
-// # define  
-// # define 
-// # define 
+/*****keycode****/
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_UP 65362
+# define KEY_LEFT 65361
+# define KEY_DOWN 65364
+# define KEY_RIGHT 653623
+# define KEY_ESC 65307
+
 typedef struct s_init
 {
 	void	*mlx;
 	void	*win;
 	char	**map;
-	void	*pl;
+	// void	*pl;
 	int		px;
 	int 	py;
 	int		mh;
@@ -42,8 +50,9 @@ typedef struct s_init
 
 
 /*****minilibx****/
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+/*****helpers****/
+void	draw_map(t_init *init);
 /*****libft****/
 char	**_split(char const *s, char c);
-void	draw_map(t_init *init);
 #endif
