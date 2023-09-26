@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/23 15:22:34 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:48:42 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <math.h>
 
 # define cell 32
+# define FOV 60
+# define PI 3.14159265359
+# define PA 90*PI/180
 # define screen_hei 512
 # define screen_wid 1024
 /*****keycode****/
@@ -42,8 +45,8 @@ typedef struct s_init
 	void	*win;
 	char	**map;
 	// void	*pl;
-	int		px;
-	int 	py;
+	float	px;
+	float	py;
 	int		mh;
 	int		mw;
 }	t_init;
