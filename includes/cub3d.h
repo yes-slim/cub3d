@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/28 03:13:02 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:15:06 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # include <string.h>
 # include <math.h>
 
-# define CELL 32
-# define FOV 60
+# define CELL 48
+# define FOV 30
+# define POV 90
 # define NUM_RAYS 1
 # define S_HEI 512
 # define S_WID 1024
