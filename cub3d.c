@@ -6,12 +6,18 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/27 00:06:52 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/28 03:38:52 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	ft_check(t_init *init)
+{
+	printf("=================================\n");
+	printf("*px=%f*======*py=%f*======*pa=%f*\n", init->px, init->py, init->pa);
+	printf("=================================\n");
+}
 int	ft_exit(t_init *init)
 {
 	mlx_destroy_window(init->mlx, init->win);
@@ -21,28 +27,35 @@ int	ft_exit(t_init *init)
 
 int	player_move(int keycode, t_init *init)
 {
-	int sp = 2;
+	int sp=2; 
+	float sa=5*M_PI/180;
 	if (keycode == KEY_ESC)
 		ft_exit(init);	
 	if (keycode == KEY_W) //w
-		if (init->map[(int)(init->py-sp)/cell][(int)init->px/cell] == '0')
+		if (init->map[(int)(init->py-sp)/CELL][(int)init->px/CELL] == '0')
 			init->py -= sp;
 	if (keycode == KEY_S) //s
-		if (init->map[((int)init->py+sp)/cell][(int)init->px/cell] == '0')
+		if (init->map[((int)init->py+sp)/CELL][(int)init->px/CELL] == '0')
 			init->py += sp;
 	if (keycode == KEY_D) //d
-		if (init->map[(int)init->py/cell][((int)init->px+sp)/cell] == '0')
+		if (init->map[(int)init->py/CELL][((int)init->px+sp)/CELL] == '0')
 			init->px += sp;
 	if (keycode == KEY_A) //a
-		if (init->map[(int)init->py/cell][((int)init->px-sp)/cell] == '0')
+		if (init->map[(int)init->py/CELL][((int)init->px-sp)/CELL] == '0')
 			init->px -= sp;
-	// if (keycode == KEY_UP) // up
-		
-	// if (keycode == KEY_DOWN) // down
-
-	// if (keycode == KEY_LEFT) // left
-
-	// if (keycode == KEY_RIGHT) // right
+	if (keycode == KEY_LEFT) // left
+	{
+		if (init->pa-sa > 2*M_PI)
+			init->pa -= 2*M_PI;
+		init->pa -= sa;
+	}
+	if (keycode == KEY_RIGHT) // right
+	{
+		if (init->pa+sa < 0)
+			init->pa += 2*M_PI;
+		init->pa += sa;
+	}
+	ft_check(init);
 	draw_map(init);
 	return (0);
 }
@@ -69,24 +82,28 @@ char **get_map(void)
 void	draw_player(t_init *init)
 {
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0x000000);
-	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0x000000);
-	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0x000000);
-	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0x000000);
+	double rx=init->px, ry=init->py;
+	while (rx <= init->mw*CELL && ry <= init->mh*CELL)
+	{
+		mlx_pixel_put(init->mlx, init->win, rx, ry, 0xD70000);
+		rx += cos(init->pa);
+		ry += sin(init->pa);
+	}
 }
 
 void	draw_map(t_init *init)
 {
 	int x=0, y=0;
-	while (init->map[y/cell] && (init->mh*cell)>= y)
+	while (init->map[y/CELL] && (init->mh*CELL)>= y)
 	{
 		x=0;
-		while (init->map[y/cell][x/cell] && (init->mw*cell)>= x)
+		while (init->map[y/CELL][x/CELL] && (init->mw*CELL)>= x)
 		{
-			if (!(x%cell) || !(y%cell))
+			if (!(x%CELL) || !(y%CELL))
 				mlx_pixel_put(init->mlx, init->win, x, y, 0xFFFFFF);
-			else if (init->map[y/cell][x/cell] == '0')
+			else if (init->map[y/CELL][x/CELL] == '0')
 				mlx_pixel_put(init->mlx, init->win, x, y, 0x878787);
-			else if (init->map[y/cell][x/cell] == '1')
+			else if (init->map[y/CELL][x/CELL] == '1')
 				mlx_pixel_put(init->mlx, init->win, x, y, 0xC09E06);
 			
 			x++;
@@ -100,15 +117,16 @@ void	draw_map(t_init *init)
 int main(int ac, char **av)
 {
 	t_init	*init = malloc(sizeof(t_init));
-	
+
 	int h=12;
 	int w=12;
 	init->map = get_map();
 	init->mh = 8, init->mw =strlen(init->map[0]);
-	init->py = (init->mh * cell / 2) - (cell / 2), init->px = (init->mw * cell / 2) - (cell /2);
+	init->py = (init->mh * CELL / 2) - (CELL / 2), init->px = (init->mw * CELL / 2) - (CELL /2);
+	init->pa = M_PI/2;
 	// init->py = 128, init->px = 96;
 	init->mlx = mlx_init();
-	init->win = mlx_new_window(init->mlx, screen_wid, screen_hei, "Cub3d");
+	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
 	// init->pl = mlx_xpm_file_to_image(init->mlx, "./raycasting/player.xpm", &h, &w);
 	draw_map(init);
 	ft_hook(init);
