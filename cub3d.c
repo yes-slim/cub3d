@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/28 03:38:52 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/28 03:51:31 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_player(t_init *init)
 {
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0x000000);
 	double rx=init->px, ry=init->py;
-	while (rx <= init->mw*CELL && ry <= init->mh*CELL)
+	while ((rx>0 && rx < init->mw*CELL) && (ry>0 && ry < init->mh*CELL))
 	{
 		mlx_pixel_put(init->mlx, init->win, rx, ry, 0xD70000);
 		rx += cos(init->pa);
@@ -123,7 +123,7 @@ int main(int ac, char **av)
 	init->map = get_map();
 	init->mh = 8, init->mw =strlen(init->map[0]);
 	init->py = (init->mh * CELL / 2) - (CELL / 2), init->px = (init->mw * CELL / 2) - (CELL /2);
-	init->pa = M_PI/2;
+	init->pa = 0;
 	// init->py = 128, init->px = 96;
 	init->mlx = mlx_init();
 	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
