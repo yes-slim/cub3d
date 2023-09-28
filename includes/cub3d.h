@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/28 12:15:06 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:51:10 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 # include <string.h>
 # include <math.h>
 
-# define CELL 48
-# define FOV 30
-# define POV 90
+# define CELL 32
+# define FOV 60
+# define POV -90
 # define NUM_RAYS 1
-# define S_HEI 512
-# define S_WID 1024
+# define S_HEI 768
+# define S_WID 1536
 /*****keycode****/
 # define KEY_W 119
 # define KEY_A 97
@@ -56,5 +56,10 @@ typedef struct s_init
 /*****helpers****/
 void	draw_map(t_init *init);
 /*****libft****/
+char	*get_next_line(int fd);
 char	**_split(char const *s, char c);
+char	*_strjoin(char const *s1, char const *s2);
+size_t	_strlen(const char *str);
+char	*_strdup(const char *src);
+
 #endif

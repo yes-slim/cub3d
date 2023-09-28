@@ -6,13 +6,13 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/09/22 14:34:50 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/09/28 15:37:51 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
 MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-SANITIZ		= -fsanitize=address
+SANITIZ		= #-fsanitize=address
 CFLAGS 		= -Wall -Werror -Wextra -g3 $(SANITIZ) $(HEADER) -c 
 NAME    	= cub3d
 DEL     	= rm -rf
@@ -20,7 +20,7 @@ DEL     	= rm -rf
 PARS 		= 
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
-LIBFT   	= _split
+LIBFT   	= _split get_next_line _strjoin _strdup
 HELPERS 	= 
 RC			= $(addprefix libft/, $(LIBFT)) \
 	 	  	  $(addprefix helpers/, $(HELPERS))
