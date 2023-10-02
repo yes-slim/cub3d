@@ -25,7 +25,7 @@
 
 # define CELL 16
 # define FOV 60
-# define POV 180
+# define POV -90
 # define S_HEI 768
 # define S_WID 1536
 # define NUM_RAYS S_WID
