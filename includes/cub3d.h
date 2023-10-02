@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/28 15:51:10 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/02 01:04:33 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define CELL 32
 # define FOV 60
 # define POV -90
-# define NUM_RAYS 1
 # define S_HEI 768
 # define S_WID 1536
+# define NUM_RAYS S_WID
 /*****keycode****/
 # define KEY_W 119
 # define KEY_A 97
@@ -42,7 +42,6 @@ typedef struct s_init
 	void	*mlx;
 	void	*win;
 	char	**map;
-	// void	*pl;
 	double	px;
 	double	py;
 	double	pa;
@@ -50,9 +49,16 @@ typedef struct s_init
 	int		mw;
 }	t_init;
 
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 /*****minilibx****/
-
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 /*****helpers****/
 void	draw_map(t_init *init);
 /*****libft****/

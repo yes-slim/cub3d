@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/09/28 15:37:51 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/02 01:09:41 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,14 @@ DEL     	= rm -rf
 PARS 		= 
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
+MLX_H		= my_mlx_pixel_put get_pixel_color
 LIBFT   	= _split get_next_line _strjoin _strdup
-HELPERS 	= 
+HELPERS 	= dda helpers_1 mouse_ev keys_ev
 RC			= $(addprefix libft/, $(LIBFT)) \
 	 	  	  $(addprefix helpers/, $(HELPERS))
 			  
-RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC)))
+RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC))) \
+			  $(addsuffix .c, $(addprefix mlx_h/, $(MLX_H)))
 #==================Scrs===============================================#
 SRCS		= $(RC_SRCS) $(Pars_SRCS)
 #====================================================================#
