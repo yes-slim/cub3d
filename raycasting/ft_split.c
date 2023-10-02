@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 13:54:50 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/21 21:13:21 by yes-slim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 static int	ft_wrdcount(char const *s, char c)
@@ -90,7 +78,7 @@ static	char	**ft_fillarr(const char *s, char **arr, int wc, char c)
 	return (arr);
 }
 
-char	**_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		wc;
 	char	**arr;
@@ -103,4 +91,31 @@ char	**_split(char const *s, char c)
 		return (NULL);
 	arr = ft_fillarr(s, arr, wc, c);
 	return (arr);
+}
+
+char	*_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	char	*new;
+	int		j;
+
+	if (!s2)
+		return (NULL);
+	if (!s1)
+		return (strdup(s2));
+	i = 0;
+	j = strlen(s1);
+	new = malloc(strlen(s1) + strlen(s2) * sizeof(char) + 1);
+	if (!new)
+		return (NULL);
+	while (s1[i])
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	i = 0;
+	while (s2[i])
+		new[j++] = s2[i++];
+	new[j] = '\0';
+	return (new);
 }

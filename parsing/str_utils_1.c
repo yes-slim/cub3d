@@ -1,40 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _strjoin.c                                         :+:      :+:    :+:   */
+/*   str_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 11:55:25 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/09/28 15:34:12 by yes-slim         ###   ########.fr       */
+/*   Created: 2023/09/30 23:36:59 by mberrouk          #+#    #+#             */
+/*   Updated: 2023/10/02 13:40:57 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*_strjoin(char const *s1, char const *s2)
+int	ft_strlen(char *str)
 {
-	int		i;
-	char	*new;
-	int		j;
+	int	i;
 
-	if (!s2)
-		return (NULL);
-	if (!s1)
-		return (_strdup(s2));
 	i = 0;
-	j = _strlen(s1);
-	new = malloc(_strlen(s1) + _strlen(s2) * sizeof(char) + 1);
-	if (!new)
-		return (NULL);
-	while (s1[i])
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		new[i] = s1[i];
 		i++;
 	}
+	return (i);
+}
+
+int	ft_strchr(char *s, char c)
+{
+	int	i;
+
 	i = 0;
-	while (s2[i])
-		new[j++] = s2[i++];
-	new[j] = '\0';
-	return (new);
+	while (s && s[i])
+	{
+		if (s[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_strcmp(char *str1, char *str2)
+{
+	int	i;
+
+	i = 0;
+	while (str1[i] && str2[i] \
+			&& str1[i] == str2[i])
+		i++;
+	return (str1[i] - str2[i]);
 }

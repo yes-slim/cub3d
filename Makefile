@@ -6,30 +6,29 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/02 01:09:41 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/02 14:33:26 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
 MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-SANITIZ		= #-fsanitize=address
-CFLAGS 		= -Wall -Werror -Wextra -g3 $(SANITIZ) $(HEADER) -c 
+SANITIZ		= -fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
 NAME    	= cub3d
 DEL     	= rm -rf
+#========================================================#
+MLX_F		= my_mlx_pixel_put get_pixel_color
+MLX_SRCS	= $(addsuffix .c, $(addprefix mlx_h/, $(MLX_F)))
 #=================parsing_files=======================================#
-PARS 		= 
+PARS 		= check_errors str_utils get_next_line parsing\
+	 		  ft_atoi linked_list initial_parse check_errors_utils\
+			  parsing_utils str_utils_1
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
-MLX_H		= my_mlx_pixel_put get_pixel_color
-LIBFT   	= _split get_next_line _strjoin _strdup
-HELPERS 	= dda helpers_1 mouse_ev keys_ev
-RC			= $(addprefix libft/, $(LIBFT)) \
-	 	  	  $(addprefix helpers/, $(HELPERS))
-			  
-RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC))) \
-			  $(addsuffix .c, $(addprefix mlx_h/, $(MLX_H)))
+RC			= dda helpers_1 mouse_ev keys_ev ft_split
+RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC)))
 #==================Scrs===============================================#
-SRCS		= $(RC_SRCS) $(Pars_SRCS)
+SRCS		= $(RC_SRCS) $(Pars_SRCS) $(MLX_SRCS)
 #====================================================================#
 OBJ     	= $(SRCS:.c=.o)
 #=========================compile=============================#
