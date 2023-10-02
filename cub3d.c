@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/02 21:23:53 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/03 00:11:23 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ void	draw_walls(t_init *init, double distance, int x)
 	while (y>=0 && y<(S_HEI/2 - distance/2))
 		my_mlx_pixel_put(init->img, x, y++, 0xFFB87D);
 	while (y>=(S_HEI/2 - distance/2) && y <(S_HEI/2 + distance/2))
-		my_mlx_pixel_put(init->img, x, y++, 0xFF7DB4);
-	while (y>=(S_HEI/2 + distance/2) && y <S_HEI)
+		my_mlx_pixel_put(init->img, x, y++, 0x4F003F);
+	while (y>=(S_HEI/2 + distance/2) && y <=S_HEI)
 		my_mlx_pixel_put(init->img, x, y++, 0x83E3FF);
 }
 
@@ -159,6 +159,10 @@ void	draw_player(t_init *init)
 	while (rp1 <= rp2)
 	{
 		distance = dda(init, rp1);
+		distance *= cos(get_rad(rp1 - init->pa));
+        distance = (S_HEI * 30) / distance;
+		if (distance > S_HEI)
+			distance = S_HEI;
 		draw_walls(init, distance, x);
 		x++;
 		if (init->pa-rot_a > 2*M_PI)
