@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   _strjoin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:55:25 by yes-slim          #+#    #+#             */
-/*   Updated: 2022/11/02 00:04:03 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:34:12 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	char	*new;
@@ -21,10 +21,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(s2));
+		return (_strdup(s2));
 	i = 0;
-	j = ft_strlen(s1);
-	new = malloc(ft_strlen(s1) + ft_strlen(s2) * sizeof(char) + 1);
+	j = _strlen(s1);
+	new = malloc(_strlen(s1) + _strlen(s2) * sizeof(char) + 1);
 	if (!new)
 		return (NULL);
 	while (s1[i])

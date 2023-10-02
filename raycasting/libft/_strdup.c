@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   _strdup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 14:07:24 by yes-slim          #+#    #+#             */
-/*   Updated: 2022/11/01 23:04:51 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:34:27 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strdup(const char *src)
+char	*_strdup(const char *src)
 {
 	size_t	i;
 	size_t	len;
 	char	*dup;
 
 	i = 0;
-	len = ft_strlen(src);
+	len = _strlen(src);
 	dup = malloc((len + 1) * sizeof(char));
 	if (!dup)
 		return (NULL);
