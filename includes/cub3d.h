@@ -6,13 +6,14 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/02 01:04:33 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:25:00 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-#define CUB_H
+#ifndef CUB3D_H
+#define CUB3D_H
 
+# include "parsing.h"
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,7 +23,7 @@
 # include <string.h>
 # include <math.h>
 
-# define CELL 32
+# define CELL 16
 # define FOV 60
 # define POV -90
 # define S_HEI 768
@@ -37,6 +38,15 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
+
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
 typedef struct s_init
 {
 	void	*mlx;
@@ -47,25 +57,16 @@ typedef struct s_init
 	double	pa;
 	int		mh;
 	int		mw;
+	t_img	*img;
 }	t_init;
 
-typedef struct	s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
-
-/*****minilibx****/
+/****minilibx****/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-/*****helpers****/
+/****helpers****/
 void	draw_map(t_init *init);
-/*****libft****/
-char	*get_next_line(int fd);
-char	**_split(char const *s, char c);
+void	draw_player(t_init *init);
+/****libft****/
 char	*_strjoin(char const *s1, char const *s2);
-size_t	_strlen(const char *str);
-char	*_strdup(const char *src);
+char	**ft_split(char const *s, char c);
 
 #endif

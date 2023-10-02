@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/02 02:05:25 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:23:53 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double get_rad(double angel)
 
 int	player_move(int keycode, t_init *init)
 {
-	double	spd=3, sa=get_rad(5), oldx = init->px, p_cos=cos(init->pa)*spd, p_sin=sin(init->pa)*spd;
+	double	spd=4, sa=get_rad(5), oldx = init->px, p_cos=cos(init->pa)*spd, p_sin=sin(init->pa)*spd;
 	if (keycode == KEY_ESC)
 		ft_exit(init);	
 	if (keycode == KEY_W)//w
@@ -68,7 +68,7 @@ int	player_move(int keycode, t_init *init)
 			init->pa += 2*M_PI;
 		init->pa += sa;
 	}
-	draw_map(init);
+	draw_player(init);
 	return (0);
 }
 
@@ -83,19 +83,6 @@ int	mouse_move(t_init *init)
 {
 
 	return (0);
-}
-
-char **get_map(void)
-{
-	int i=1, fd=open("./maps/map.cub", O_RDWR);
-	char *map = NULL, *buff = get_next_line(fd);
-	while (buff)
-	{
-		buff = _strjoin(buff, "\n");
-		map = _strjoin(map, buff);
-		buff = get_next_line(fd);
-	}
-	return (_split(map, '\n'));
 }
 
 double	dda_v(t_init *init, double ra)
@@ -139,42 +126,49 @@ double	dda_h(t_init *init, double ra)
 	return (dis_h);
 }
 
-double	dda(t_init *init)
+double	dda(t_init *init, double ra)
 {
 	double	dis, dis_v, dis_h;	
-			
+	dis_v = dda_v(init, ra);
+	dis_h = dda_h(init, ra);
+	if (dis_h > dis_v)
+		dis = dis_v;
+	else
+		dis = dis_h;
 	return (dis);
+}
+
+void	draw_walls(t_init *init, double distance, int x)
+{
+	int y=0;
+	while (y>=0 && y<(S_HEI/2 - distance/2))
+		my_mlx_pixel_put(init->img, x, y++, 0xFFB87D);
+	while (y>=(S_HEI/2 - distance/2) && y <(S_HEI/2 + distance/2))
+		my_mlx_pixel_put(init->img, x, y++, 0xFF7DB4);
+	while (y>=(S_HEI/2 + distance/2) && y <S_HEI)
+		my_mlx_pixel_put(init->img, x, y++, 0x83E3FF);
 }
 
 void	draw_player(t_init *init)
 {
+	int x=0;
 	double rot_a = get_rad((double)FOV / (double)(NUM_RAYS));
-	double rx=init->px, ry=init->py, distance, dis_v, dis_h;
+	double distance, dis_v, dis_h;
 	double p_sin = sin(init->pa), p_cos=cos(init->pa);
 	double rp1=init->pa - get_rad(FOV/2), rp2=init->pa + get_rad(FOV/2);
 	while (rp1 <= rp2)
 	{
-		rx=init->px, ry=init->py;
-		while ((rx>0 && rx < init->mw*CELL) && (ry>0 && ry < init->mh*CELL))
-		{
-			if (init->map[(int)ry/CELL][(int)rx/CELL] != '0')
-				break;
-			mlx_pixel_put(init->mlx, init->win, rx, ry, 0x000000);
-			ry += sin(init->pa);
-			rx += cos(init->pa);
-			dis_v = dda_v(init, rp1);
-			dis_h = dda_h(init, rp1);
-			if (dis_h > dis_v)
-				distance = dis_v;
-			else
-				distance = dis_h;
-		}
+		distance = dda(init, rp1);
+		draw_walls(init, distance, x);
+		x++;
 		if (init->pa-rot_a > 2*M_PI)
 			init->pa -= 2*M_PI;
 		if (init->pa+rot_a < 0)
 			init->pa += 2*M_PI;
 		rp1 += rot_a;
 	}
+	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
+	draw_map(init);
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0x000000);
 	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0x000000);
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0x000000);
@@ -200,26 +194,64 @@ void	draw_map(t_init *init)
 		}
 		y++;
 	}
-	draw_player(init);
-	// mlx_put_image_to_window(init->mlx, init->win, init->pl, init->px, init->py);
+	double rot_a = get_rad((double)FOV / (double)(NUM_RAYS));
+	double rp1=init->pa - get_rad(FOV/2), rp2=init->pa + get_rad(FOV/2);
+	double rx=init->px, ry=init->py; 
+	while (rp1 <= rp2)
+	{
+		rx=init->px, ry=init->py;
+		while ((rx>0 && rx < init->mw*CELL) && (ry>0 && ry < init->mh*CELL))
+		{
+			if (init->map[(int)ry/CELL][(int)rx/CELL] != '0')
+				break;
+			mlx_pixel_put(init->mlx, init->win, rx, ry, 0x000000);
+			ry += sin(rp1);
+			rx += cos(rp1);
+		}
+		if (init->pa-rot_a > 2*M_PI)
+			init->pa -= 2*M_PI;
+		if (init->pa+rot_a < 0)
+			init->pa += 2*M_PI;
+		rp1 += rot_a;
+	}
+	// draw_player(init);
+}
+
+char **get_map(void)
+{
+	int i=1, fd=open("./maps/map.cub", O_RDWR);
+	char *map = NULL, *buff = get_next_line(fd);
+	while (buff)
+	{
+		buff = _strjoin(buff, "\n");
+		map = _strjoin(map, buff);
+		buff = get_next_line(fd);
+	}
+	return (ft_split(map, '\n'));
 }
 
 int main(int ac, char **av)
 {
 	t_init	*init = malloc(sizeof(t_init));
-
+	init->img = malloc(sizeof(t_img));
 	int h=12;
 	int w=12;
 	init->map = get_map();
 	init->mh = 8, init->mw =strlen(init->map[0]);
-	init->py = 176, init->px = 208;
+	init->px = 10*CELL + CELL/2, init->py =6*CELL + CELL/2 ;
 	init->pa = get_rad(POV);
 	// init->py = 128, init->px = 96;
 	init->mlx = mlx_init();
 	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
-	// init->pl = mlx_xpm_file_to_image(init->mlx, "./raycasting/player.xpm", &h, &w);
-	draw_map(init);
+	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
+	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
+	draw_player(init);
 	ft_hook(init);
 	mlx_loop(init->mlx);
+	// t_data	data;
+
+	// if (init_pars(ac, av, &data) == ERROR)
+	// 	return (1);
+	// clean_parsing_data(&data);
+	// return (0);
 }
-					  		         
