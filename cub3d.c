@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/03 00:11:23 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/03 00:24:17 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ int main(int ac, char **av)
 	int w=12;
 	init->map = get_map();
 	init->mh = 8, init->mw =strlen(init->map[0]);
-	init->px = 10*CELL + CELL/2, init->py =6*CELL + CELL/2 ;
+	init->px = 1*CELL + CELL/2, init->py =5*CELL + CELL/2 ;
 	init->pa = get_rad(POV);
 	// init->py = 128, init->px = 96;
 	init->mlx = mlx_init();
