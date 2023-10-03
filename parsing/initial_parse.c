@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	print_errmsg(char *msg)
 {
-	int i;
+	int	i;
 
-	i = write(STDERR_FILENO, "Error\n", 6);
+	i = 0;
+	i += write(STDERR_FILENO, "Error\n", 6);
 	if (msg && *msg)
 	{
 		i += write(STDERR_FILENO, msg, ft_strlen(msg));
 		i += write(STDERR_FILENO, "\n", 1);
-		return (i);
 	}
 	return (ERROR);
 }
@@ -30,12 +30,15 @@ int	init_parsing_data(t_data *data)
 {
 	int	i;
 
+	i = 0;
 	data->map = NULL;
 	data->mp = NULL;
+	data->textures = malloc(sizeof(char *) * 5);
+	if (!data->textures)
+		return (ERROR);
+	while (i < 5)
+		data->textures[i++] = NULL;
 	data->len_map = 0;
-	i = 0;
-	while (i < 4)
-		data->fd[i++] = 0;
 	data->F = -1;
 	data->C = -1;
 	return (VALID);
@@ -53,10 +56,10 @@ void	clean_parsing_data(t_data *data)
 		free(data->mp);
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
-		if (data->fd[i] > 2)
-			close(data->fd[i]);
+		if (data->textures[i] != NULL)
+			free(data->textures[i]);
 		i++;
 	}
 	ft_lstclear(&(data->map));
@@ -65,9 +68,10 @@ void	clean_parsing_data(t_data *data)
 int	init_pars(int ac, char *av[], t_data *data)
 {
 	int		fd;
+	int		flag;
 
-	if (ac != 2 ||!check_extension_file(av[1]))
-		return (print_errmsg("Invalid args"));
+	if (ac != 2 || ft_strcmp(&(av[1][ft_strlen(av[1]) - 4]), ".cub"))
+		return (print_errmsg("Usage: ./cub3D <your map>.cub"));
 	fd = open(av[1], O_RDONLY);
 	if (fd < 3)
 	{
@@ -75,9 +79,12 @@ int	init_pars(int ac, char *av[], t_data *data)
 		perror(av[1]);
 		return (ERROR);
 	}
-	if (!init_parsing_data(data) || parsing_file(fd, data, 0, 0) == ERROR)
+	init_parsing_data(data);
+	flag = parsing_file(fd, data, 0, 0);
+	if (flag < 0)
 	{
-		print_errmsg("Invalid args");
+		if (flag != -2)
+			print_errmsg("Invalid args");
 		clean_parsing_data(data);
 		return (ERROR);
 	}

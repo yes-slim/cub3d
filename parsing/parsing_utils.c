@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	valid_form(char *arg, int j, int comma)
 {
@@ -20,24 +20,26 @@ int	valid_form(char *arg, int j, int comma)
 						|| arg[j + 1] == '\n')));
 }
 
-int	convert_rgb(char *arg, int *comma, int conver)
+int	convert_rgb(char *arg, int conver)
 {
 	int	i;
 	int	value;
 
 	i = 0;
-	(*comma) += 1;
 	while (WHITESPACE(arg[i]))
 		i++;
 	value = ft_atoi(&arg[i]);
 	if (!arg[i] || value < 0 || value > 255)
+	{
 		return (-1);
+	}
 	return (value << conver);
 }
 
 int	floor_ceiling_value(char *arg, int comma, int conver, int i)
 {
 	int	j;
+	int	value;
 	int	result;
 
 	j = i;
@@ -46,14 +48,22 @@ int	floor_ceiling_value(char *arg, int comma, int conver, int i)
 	{
 		if (valid_form(arg, j, comma))
 			return (-1);
-		if (arg[j] == ',')
-		{
-			arg[j] = '\0';
-			result += convert_rgb(&arg[i], &comma, conver);
-			conver -= 8;
-			i = j + 1;
-		}
 		j++;
+		if (arg[j] == ',' || !arg[j])
+		{
+			if (arg[j])
+			{
+				arg[j] = '\0';
+				comma++;
+				j++;
+			}
+			value = convert_rgb(&arg[i], conver);
+			if (value == -1)
+				return (-1);
+			result += value;
+			conver -= 8;
+			i = j;
+		}
 	}
 	if (comma != 2)
 		return (-1);
@@ -92,13 +102,13 @@ int	check_arg(t_data *data, char *line)
 	while (line[i + j] && !WHITESPACE(line[i + j]))
 		j++;
 	line[i + j++] = '\0';
-	if (!ft_strcmp(&line[i], "NO") && !data->fd[NO])
+	if (!ft_strcmp(&line[i], "NO") && !data->textures[NO])
 		return (get_data(data, &line[i + j], NO));
-	if (!ft_strcmp(&line[i], "SO") && !data->fd[SO])
+	if (!ft_strcmp(&line[i], "SO") && !data->textures[SO])
 		return (get_data(data, &line[i + j], SO));
-	if (!ft_strcmp(&line[i], "WE") && !data->fd[WE])
+	if (!ft_strcmp(&line[i], "WE") && !data->textures[WE])
 		return (get_data(data, &line[i + j], WE));
-	if (!ft_strcmp(&line[i], "EA") && !data->fd[EA])
+	if (!ft_strcmp(&line[i], "EA") && !data->textures[EA])
 		return (get_data(data, &line[i + j], EA));
 	if (!ft_strcmp(&line[i], "F") && data->F == -1)
 		return (get_floor_ceiling(data, &line[i + j], F));

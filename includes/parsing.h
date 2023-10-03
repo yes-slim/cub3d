@@ -45,7 +45,7 @@ typedef struct s_map
 typedef struct s_data
 {
 	char		**mp;
-	int			fd[4];
+	char		**textures;
 	int			len_map;
 	int			F;
 	int			C;
@@ -67,9 +67,9 @@ char	*ft_strjoin(char *s1, char *s2, int len);
 char	*ft_strdup(char *s1);
 
 /****parsing.c****/
-int	parsing_file(int fd, t_data *data, int row, int countarg);
-int	get_data(t_data *data, char *arg, int flag);
-int	fetch_map(t_data *data, char *line, int *row_index);
+int		parsing_file(int fd, t_data *data, int row, int countarg);
+int		get_data(t_data *data, char *arg, int flag);
+void	fetch_map(t_data *data, char *line, int *row_index);
 
 /****ft_atoi.c****/
 int	ft_atoi(const char *str);
@@ -84,12 +84,13 @@ void	ft_lstclear(t_map **lst);
 int		init_parsing_data(t_data *data);
 void	clean_parsing_data(t_data *data);
 int		init_pars(int ac, char *av[], t_data *data);
+int		print_errmsg(char *msg);
 
 /****parsing_utils.c****/ 
 int	check_arg(t_data *data, char *line);
 int	get_floor_ceiling(t_data *data, char *arg, int flag);
 int	floor_ceiling_value(char *arg, int comma, int conver, int i);
-int	convert_rgb(char *arg, int *comma, int conver);
+int	convert_rgb(char *arg, int conver);
 int	valid_form(char *arg, int j, int comma);
 
 /****check_errors_utils.c****/

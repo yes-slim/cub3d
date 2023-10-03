@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	check_extension_file(char *str)
 {
@@ -114,7 +114,8 @@ int	check_map(t_data *data, int len, int j)
 				return (ERROR);
 			i++;
 		}
-		tmp->row[i] = '\0';
+		if (i)
+			tmp->row[i] = '\0';
 		data->mp[j] = ft_strdup(tmp->row);
 		tmp = tmp->next;
 		j++;
