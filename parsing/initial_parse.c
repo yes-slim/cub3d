@@ -62,6 +62,7 @@ void	clean_parsing_data(t_data *data)
 			free(data->textures[i]);
 		i++;
 	}
+	free(data->textures);
 	ft_lstclear(&(data->map));
 }
 
@@ -81,7 +82,7 @@ int	init_pars(int ac, char *av[], t_data *data)
 	}
 	init_parsing_data(data);
 	flag = parsing_file(fd, data, 0, 0);
-	if (flag < 0)
+	if (flag <= 0)
 	{
 		if (flag != -2)
 			print_errmsg("Invalid args");
