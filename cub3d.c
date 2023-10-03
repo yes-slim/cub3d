@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/03 00:24:17 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:23:11 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,58 +23,10 @@ double get_rad(double angel)
 	return (angel * M_PI / 180);
 }
 
-int	player_move(int keycode, t_init *init)
-{
-	double	spd=4, sa=get_rad(5), oldx = init->px, p_cos=cos(init->pa)*spd, p_sin=sin(init->pa)*spd;
-	if (keycode == KEY_ESC)
-		ft_exit(init);	
-	if (keycode == KEY_W)//w
-	{ 
-		if (init->map[(int)(init->py)/CELL][(int)((init->px+p_cos)/CELL)] == '0' )
-			init->px += p_cos;
-		if (init->map[(int)(init->py + p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py += p_sin;
-	}
-	if (keycode == KEY_S) //s
-	{
-		if (init->map[(int)(init->py)/CELL][(int)((init->px-p_cos)/CELL)] == '0' )
-			init->px -= p_cos;
-		if (init->map[(int)(init->py-p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py -= p_sin;
-	}
-	if (keycode == KEY_D) //d
-	{
-		if (init->map[(int)(init->py)/CELL][(int)((init->px+p_cos)/CELL)] == '0' )
-			init->px += p_cos;
-		if (init->map[(int)(init->py - p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py -= p_sin;
-	}
-	if (keycode == KEY_A) //a
-	{
-		if (init->map[(int)(init->py)/CELL][(int)((init->px-p_cos)/CELL)] == '0' )
-			init->px -= p_cos;
-		if (init->map[(int)(init->py + p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py += p_sin;
-	}
-	if (keycode == KEY_LEFT) // left
-	{
-		if (init->pa-sa > 2*M_PI)
-			init->pa -= 2*M_PI;
-		init->pa -= sa;
-	}
-	if (keycode == KEY_RIGHT) // right
-	{
-		if (init->pa+sa < 0)
-			init->pa += 2*M_PI;
-		init->pa += sa;
-	}
-	draw_player(init);
-	return (0);
-}
-
 void	ft_hook(t_init *init)
 {
-	mlx_hook(init->win, 2, 1L<<0, player_move, init);
+	mlx_hook(init->win, 2, 1L<<0, move_player, init);
+	mlx_key_hook(init->win, move_angel, init);
 	mlx_hook(init->win, 17, 0, ft_exit, init);
 	// mlx_hook(init->win, , player_move, init);
 }
@@ -236,6 +188,10 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
+	t_data	data;
+
+	if (init_pars(ac, av, &data) == ERROR)
+		return (1);
 	t_init	*init = malloc(sizeof(t_init));
 	init->img = malloc(sizeof(t_img));
 	int h=12;
@@ -252,10 +208,6 @@ int main(int ac, char **av)
 	draw_player(init);
 	ft_hook(init);
 	mlx_loop(init->mlx);
-	// t_data	data;
-
-	// if (init_pars(ac, av, &data) == ERROR)
-	// 	return (1);
 	// clean_parsing_data(&data);
 	// return (0);
 }

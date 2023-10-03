@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 14:23:45 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:20:43 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	init_pars(int ac, char *av[], t_data *data)
 {
 	int		fd;
 
-	if (ac != 2 ||!check_extension_file(av[1]))
+	if (ac != 2 || !check_extension_file(av[1]))
 		return (print_errmsg("Invalid args"));
 	fd = open(av[1], O_RDONLY);
 	if (fd < 3)
