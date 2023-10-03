@@ -10,7 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
+#include "../includes/parsing.h"
+
+int	check_opening_files(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		print_errmsg(NULL);
+		perror(path);
+		return (-2);
+	}
+	close(fd);
+	return (VALID);
+}
 
 int	get_data(t_data *data, char *arg, int flag)
 {
@@ -31,33 +47,26 @@ int	get_data(t_data *data, char *arg, int flag)
 	}
 	if (len < 3 || ft_strcmp(&arg[len - 3], ".xpm" ))
 		return (-1);
-	data->fd[flag] = open(arg, O_RDONLY);
-	if (data->fd[flag] < 0)
-		return (-1);
+	if (check_opening_files(&arg[i]) == -2)
+		return (-2);
+	data->textures[flag] = ft_strdup(arg); 
 	return (VALID);
 }
 
-int	fetch_map(t_data *data, char *line, int *row_index)
+void	fetch_map(t_data *data, char *line, int *row_index)
 {
 	int	i;
 
 	i = 0;
 	while (WHITESPACE(line[i]))
 		i++;
-	if (!line[i])
-	{
-		if (*row_index)
-		{
-			free(line);
-			return (ERROR);
-		}
-	}
+	if (!line[i] && !*row_index)
+		return ;
 	else
 	{
 		ft_lstadd_back(&data->map, ft_lstnew(ft_strdup(line)));
 		*row_index += 1;
 	}
-	return (VALID);
 }
 
 int	parsing_file(int fd, t_data *data, int row, int countarg)
@@ -73,16 +82,15 @@ int	parsing_file(int fd, t_data *data, int row, int countarg)
 		if (countarg < 6)
 		{
 			flag = check_arg(data, line);
-			if (flag == -1)
+			if (flag < 0)
 			{
 				free(line);
-				return (ERROR);
+				return (flag);
 			}
 			countarg += flag;
 		}
 		else
-			if (fetch_map(data, line, &row) == ERROR)
-				return (ERROR);
+			fetch_map(data, line, &row);
 		free(line);
 	}
 	return (countarg == 6 && check_map(data, row, 0));

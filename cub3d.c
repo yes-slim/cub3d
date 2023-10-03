@@ -6,11 +6,11 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/03 12:23:11 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:27:17 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "./includes/cub3d.h"
 
 int	ft_exit(t_init *init)
 {
@@ -188,26 +188,28 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
+//	t_init	*init = malloc(sizeof(t_init));
+//	init->img = malloc(sizeof(t_img));
+//	int h=12;
+//	int w=12;
+//	init->map = get_map();
+//	init->mh = 8, init->mw =strlen(init->map[0]);
+//	init->px = 1*CELL + CELL/2, init->py =5*CELL + CELL/2 ;
+//	init->pa = get_rad(POV);
+//	// init->py = 128, init->px = 96;
+//	init->mlx = mlx_init();
+//	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
+//	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
+//	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
+//	draw_player(init);
+//	ft_hook(init);
+//	mlx_loop(init->mlx);
 	t_data	data;
 
 	if (init_pars(ac, av, &data) == ERROR)
-		return (1);
-	t_init	*init = malloc(sizeof(t_init));
-	init->img = malloc(sizeof(t_img));
-	int h=12;
-	int w=12;
-	init->map = get_map();
-	init->mh = 8, init->mw =strlen(init->map[0]);
-	init->px = 1*CELL + CELL/2, init->py =5*CELL + CELL/2 ;
-	init->pa = get_rad(POV);
-	// init->py = 128, init->px = 96;
-	init->mlx = mlx_init();
-	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
-	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
-	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
-	draw_player(init);
-	ft_hook(init);
-	mlx_loop(init->mlx);
-	// clean_parsing_data(&data);
-	// return (0);
+	 	return (1);
+	printf("c -> %d\n", data.C);
+	printf("f -> %d\n", data.F);
+	clean_parsing_data(&data);
+	return (0);
 }
