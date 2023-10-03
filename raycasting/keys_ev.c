@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 01:28:01 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/03 01:32:09 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:37:03 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	move_player(int keycode, t_init *init)
 {
-	double	spd=2.5, oldx = init->px, p_cos=cos(init->pa)*spd, p_sin=sin(init->pa)*spd;
-	if (keycode == KEY_ESC)
-		ft_exit(init);	
+	double	spd=2.5, oldx = init->px, p_cos=cos(init->pa)*spd, p_sin=sin(init->pa)*spd;	
 	if (keycode == KEY_W)//w
 	{ 
 		if (init->map[(int)(init->py)/CELL][(int)((init->px+p_cos)/CELL)] == '0' )
@@ -52,6 +50,8 @@ int	move_player(int keycode, t_init *init)
 int move_angel(int keycode, t_init *init)
 {
 	double sa=get_rad(2.5);
+	if (keycode == KEY_ESC)
+	ft_exit(init);
 	if (keycode == KEY_LEFT) // left
 	{
 		if (init->pa-sa > 2*M_PI)
