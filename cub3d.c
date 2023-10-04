@@ -6,7 +6,11 @@
 /*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/10/04 17:53:30 by yes-slim         ###   ########.fr       */
+=======
 /*   Updated: 2023/10/04 05:17:27 by mberrouk         ###   ########.fr       */
+>>>>>>> origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,60 +28,11 @@ double get_rad(double angel)
 	return (angel * M_PI / 180);
 }
 
-int	player_move(int keycode, t_init *init)
-{
-	double	spd=4, sa=get_rad(5), oldx = init->px, p_cos=cos(init->pa)*spd, p_sin=sin(init->pa)*spd;
-	if (keycode == KEY_ESC)
-		ft_exit(init);	
-	if (keycode == KEY_W)//w
-	{ 
-		if (init->map[(int)(init->py)/CELL][(int)((init->px+p_cos)/CELL)] == '0' )
-			init->px += p_cos;
-		if (init->map[(int)(init->py + p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py += p_sin;
-	}
-	if (keycode == KEY_S) //s
-	{
-		if (init->map[(int)(init->py)/CELL][(int)((init->px-p_cos)/CELL)] == '0' )
-			init->px -= p_cos;
-		if (init->map[(int)(init->py-p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py -= p_sin;
-	}
-	if (keycode == KEY_D) //d
-	{
-		if (init->map[(int)(init->py)/CELL][(int)((init->px+p_cos)/CELL)] == '0' )
-			init->px += p_cos;
-		if (init->map[(int)(init->py - p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py -= p_sin;
-	}
-	if (keycode == KEY_A) //a
-	{
-		if (init->map[(int)(init->py)/CELL][(int)((init->px-p_cos)/CELL)] == '0' )
-			init->px -= p_cos;
-		if (init->map[(int)(init->py + p_sin)/CELL][(int)(oldx/CELL)] == '0' )
-			init->py += p_sin;
-	}
-	if (keycode == KEY_LEFT) // left
-	{
-		if (init->pa-sa > 2*M_PI)
-			init->pa -= 2*M_PI;
-		init->pa -= sa;
-	}
-	if (keycode == KEY_RIGHT) // right
-	{
-		if (init->pa+sa < 0)
-			init->pa += 2*M_PI;
-		init->pa += sa;
-	}
-	draw_player(init);
-	return (0);
-}
-
 void	ft_hook(t_init *init)
 {
-	mlx_hook(init->win, 2, 1L<<0, player_move, init);
+	mlx_hook(init->win, 2, 1L<<0, key_pressed, init);
+	mlx_hook(init->win, 3, 1L<<1, key_release, init);
 	mlx_hook(init->win, 17, 0, ft_exit, init);
-	// mlx_hook(init->win, , player_move, init);
 }
 
 int	mouse_move(t_init *init)
@@ -86,62 +41,11 @@ int	mouse_move(t_init *init)
 	return (0);
 }
 
-double	dda_v(t_init *init, double ra)
-{
-	double 	dis_v;	
-	double ver_x = (int)(init->px/CELL + (cos(ra) > 0)) * CELL;
-	double ver_y = tan(ra)*(ver_x - init->px) + init->py;
-	while ((ver_x>0 && ver_x < init->mw*CELL) && (ver_y>0 && ver_y < init->mh*CELL))
-	{
-		if (init->map[(int)ver_y/CELL][(int)ver_x/CELL] == '1')
-			break ;
-		if (init->map[(int)ver_y/CELL][(int)ver_x/CELL -1] == '1')
-			break ;
-		ver_x -= CELL;
-		if (cos(ra) > 0)
-			ver_x += 2*CELL;
-		ver_y = tan(ra)*(ver_x - init->px) + init->py;
-	}
-	dis_v = sqrt((ver_x-init->px)*(ver_x-init->px) + (ver_y-init->py)*(ver_y-init->py));
-	return (dis_v);
-}
-
-double	dda_h(t_init *init, double ra)
-{
-	double 	dis_h;
-	double	ver_y = (int)(init->py/CELL + (sin(ra) > 0)) * CELL;
-	double	ver_x = (ver_y - init->py) / tan(ra) + init->px;
-	while ((ver_x>0 && ver_x < init->mw*CELL) && (ver_y>0 && ver_y < init->mh*CELL))
-	{
-		if (init->map[(int)ver_y/CELL][(int)ver_x/CELL] == '1')
-			break ;
-		if (init->map[(int)ver_y/CELL -1][(int)ver_x/CELL] == '1')
-			break ;
-		ver_y += CELL;
-		if (sin(ra) < 0)
-			ver_y -= 2*CELL;
-		ver_x = (ver_y - init->py) / tan(ra) + init->px;
-		
-	}
-	dis_h = sqrt((ver_x-init->px)*(ver_x-init->px) + (ver_y-init->py)*(ver_y-init->py));
-	return (dis_h);
-}
-
-double	dda(t_init *init, double ra)
-{
-	double	dis, dis_v, dis_h;	
-	dis_v = dda_v(init, ra);
-	dis_h = dda_h(init, ra);
-	if (dis_h > dis_v)
-		dis = dis_v;
-	else
-		dis = dis_h;
-	return (dis);
-}
-
 void	draw_walls(t_init *init, double distance, int x)
 {
-	int y=0;
+	int y;
+	
+	y = 0;
 	while (y>=0 && y<(S_HEI/2 - distance/2))
 		my_mlx_pixel_put(init->img, x, y++, 0xFFB87D);
 	while (y>=(S_HEI/2 - distance/2) && y <(S_HEI/2 + distance/2))
@@ -159,25 +63,21 @@ void	draw_player(t_init *init)
 	double rp1=init->pa - get_rad(FOV/2), rp2=init->pa + get_rad(FOV/2);
 	while (rp1 <= rp2)
 	{
+		if (init->pa > 2*M_PI)
+			init->pa -= 2*M_PI;
+		if (init->pa < 0)
+			init->pa += 2*M_PI;
 		distance = dda(init, rp1);
-		distance *= cos(get_rad(rp1 - init->pa));
-        distance = (S_HEI * 30) / distance;
-		if (distance > S_HEI)
-			distance = S_HEI;
 		draw_walls(init, distance, x);
 		x++;
-		if (init->pa-rot_a > 2*M_PI)
-			init->pa -= 2*M_PI;
-		if (init->pa+rot_a < 0)
-			init->pa += 2*M_PI;
 		rp1 += rot_a;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	draw_map(init);
-	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0x000000);
-	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0x000000);
-	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0x000000);
-	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0x000000);
+	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
 }
 
 void	draw_map(t_init *init)
@@ -210,8 +110,8 @@ void	draw_map(t_init *init)
 			if (init->map[(int)ry/CELL][(int)rx/CELL] != '0')
 				break;
 			mlx_pixel_put(init->mlx, init->win, rx, ry, 0x000000);
-			ry += sin(rp1);
-			rx += cos(rp1);
+			ry += sin(init->pa);
+			rx += cos(init->pa);
 		}
 		if (init->pa-rot_a > 2*M_PI)
 			init->pa -= 2*M_PI;
@@ -219,12 +119,11 @@ void	draw_map(t_init *init)
 			init->pa += 2*M_PI;
 		rp1 += rot_a;
 	}
-	// draw_player(init);
 }
 
 char **get_map(void)
 {
-	int i=1, fd=open("./maps/map.cub", O_RDWR);
+	int i=1, fd=open("./maps/m.cub", O_RDWR);
 	char *map = NULL, *buff = get_next_line(fd);
 	while (buff)
 	{
@@ -237,38 +136,36 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
-//	t_init	*init = malloc(sizeof(t_init));
-//	init->img = malloc(sizeof(t_img));
-//	int h=12;
-//	int w=12;
-//	init->map = get_map();
-//	init->mh = 8, init->mw =strlen(init->map[0]);
-//	init->px = 1*CELL + CELL/2, init->py =5*CELL + CELL/2 ;
-//	init->pa = get_rad(POV);
-//	// init->py = 128, init->px = 96;
-//	init->mlx = mlx_init();
-//	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
-//	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
-//	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
-//	draw_player(init);
-//	ft_hook(init);
-//	mlx_loop(init->mlx);
-	 t_data	data;
-
-	 if (init_pars(ac, av, &data) == ERROR)
-	{	
-		//printf("\033[1;31m --> ERROR\n");
-		return (1);
-	}
-	printf("c -> %d\n", data.C);
-	printf("f -> %d\n", data.F);
-	printf("x -> %f\n", data.x);
-	printf("y -> %f\n", data.y);
-	for (int i = 0; data.mp[i]; i++)
-	{
-		printf("%s\n", data.mp[i]);
-	}
-	clean_parsing_data(&data);
-	printf("\033[1;33m --> VALID\n");
-	return (0);
+	t_init	*init = malloc(sizeof(t_init));
+	init->img = malloc(sizeof(t_img));
+	init->keys = malloc(sizeof(t_keys));
+	init->map = get_map();
+	init->mh = 15, init->mw =strlen(init->map[0]);
+	init->px = 1*CELL + CELL/2, init->py =5*CELL + CELL/2 ;
+	init->pa = get_rad(90);
+	init->mlx = mlx_init();
+	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
+	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
+	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
+	draw_player(init);
+	ft_hook(init);
+	mlx_loop(init->mlx);
+	
+	// t_data	data;
+	//  if (init_pars(ac, av, &data) == ERROR)
+	// {	
+	// 	//printf("\033[1;31m --> ERROR\n");
+	// 	return (1);
+	// }
+	// printf("c -> %d\n", data.C);
+	// printf("f -> %d\n", data.F);
+	// printf("x -> %f\n", data.x);
+	// printf("y -> %f\n", data.y);
+	// for (int i = 0; data.mp[i]; i++)
+	// {
+	// 	printf("%s\n", data.mp[i]);
+	// }
+	// clean_parsing_data(&data);
+	// printf("\033[1;33m --> VALID\n");
+	// return (0);
 }
