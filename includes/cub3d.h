@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/03 01:32:19 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:53:38 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define CELL 16
 # define FOV 60
-# define POV -90
+# define POV 0
 # define S_HEI 768
 # define S_WID 1536
 # define NUM_RAYS S_WID
@@ -47,6 +47,15 @@ typedef struct	s_img {
 	int		endian;
 }	t_img;
 
+typedef struct s_keys {
+	int	m_D;
+	int	m_A;
+	int	m_S;
+	int	m_W;
+	int	m_R;
+	int	m_L;
+}	t_keys;
+
 typedef struct s_init
 {
 	void	*mlx;
@@ -58,17 +67,21 @@ typedef struct s_init
 	int		mh;
 	int		mw;
 	t_img	*img;
+	t_keys	*keys;
 }	t_init;
 
 /****minilibx****/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		get_pixel_color(t_img *img, int x, int y);
 /****helpers****/
-int	move_player(int keycode, t_init *init);
-int move_angel(int keycode, t_init *init);
+double	dda(t_init *init, double ra);
+int 	key_pressed(int keycode, t_init *init);
+int		key_release(int keycode, t_init *init);
+int		move_player(t_init *init);
 void	draw_map(t_init *init);
 void	draw_player(t_init *init);
-int	ft_exit(t_init *init);
-double get_rad(double angel);
+int		ft_exit(t_init *init);
+double	get_rad(double angel);
 /****libft****/
 char	*_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);

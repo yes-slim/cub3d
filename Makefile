@@ -6,13 +6,13 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/03 01:26:41 by mberrouk         ###   ########.fr        #
+#    Updated: 2023/10/03 16:05:56 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
 MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-SANITIZ		= -g3 #-fsanitize=address
+SANITIZ		= -fsanitize=address
 CFLAGS 		= -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
 NAME    	= cub3d
 DEL     	= rm -rf
