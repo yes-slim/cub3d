@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:38:23 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 13:40:24 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 03:00:09 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,8 @@ int	valid_form(char *arg, int j, int comma);
 /****check_errors_utils.c****/
 int	map_component(char c);
 int	valid_space(t_data *data, int x, int y);
+
+/****parsing_utils_1.c****/
+void	trim_spaces(t_data *data);
 
 #endif

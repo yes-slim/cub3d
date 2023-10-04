@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:36:30 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 13:40:57 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 05:27:37 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	check_extension_file(char *str)
-{
-	int	len;
-
-	len = ft_strlen(str) - 1;
-	if (len < 4)
-		return (ERROR);
-	while (len && WHITESPACE(str[len]))
-		len--;
-	if (str[len] != 'b' || str[len - 1] != 'u'\
-		|| str[len - 2] != 'c' || str[len - 3] != '.')
-		return (ERROR);
-	return (VALID);
-}
 
 int	check_map_edge(t_data *data, int y)
 {
@@ -119,8 +104,8 @@ int	check_space_comp(t_data *data)
 				flag = 1;
 				if (check_position(data, y, x) == ERROR)
 					return (ERROR);
-				data->x = (float)(x * CELL) + (float)(CELL / 2);
-				data->y = ((float)y * CELL) + ((float)CELL / 2);
+				data->x = (double)(x * CELL) + ((double)CELL / 2);
+				data->y = (double)(y * CELL) + ((double)CELL / 2);
 				data->mp[y][x] = '0';
 			}
 			x++;
@@ -128,7 +113,9 @@ int	check_space_comp(t_data *data)
 		y++;
 	}
 	if (!flag)
+	{
 		return (ERROR);
+	}
 	return (VALID);
 }
 
@@ -142,6 +129,7 @@ int	check_map(t_data *data, int len, int j)
 	if (!data->map || data->len_map == 0)
 		return (ERROR);
 	data->mp = malloc(sizeof(char *) * (len + 1));
+	data->mp[0] = 0x00;
 	while (tmp)
 	{
 		i = 0;
@@ -158,5 +146,6 @@ int	check_map(t_data *data, int len, int j)
 		j++;
 		data->mp[j] = NULL;
 	}
+	trim_spaces(data);
 	return (check_space_comp(data));
 }
