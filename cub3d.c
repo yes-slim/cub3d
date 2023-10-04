@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/03 00:24:17 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 05:17:27 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ int main(int ac, char **av)
 
 	 if (init_pars(ac, av, &data) == ERROR)
 	{	
-		printf("\033[1;31m --> ERROR\n");
+		//printf("\033[1;31m --> ERROR\n");
 		return (1);
 	}
 	printf("c -> %d\n", data.C);

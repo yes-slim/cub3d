@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initial_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 14:23:45 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 05:22:38 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	clean_parsing_data(t_data *data)
 	{
 		i = 0;
 		while (data->mp[i])
-			free(data->mp[i++]);
+		{
+			free(data->mp[i]);
+			i++;
+		}
 		free(data->mp);
 	}
 	i = 0;
