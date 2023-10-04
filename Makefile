@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
-#MLX		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-MLX			=  -I /usr/X11/include -g -L ./  -l mlx -framework OpenGL -framework AppKit 
+MLX		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
+#MLX			=  -I ./tmp_files -g -L ./tmp_files  -l mlx -framework OpenGL -framework AppKit 
 SANITIZ		=  -fsanitize=address
-#CFLAGS 	=  -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
-CFLAGS 		=  -g3 $(SANITIZ) $(HEADER) -c 
+CFLAGS 	=  -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
+#CFLAGS 		=  -g3 $(SANITIZ) $(HEADER) -c 
 NAME    	= cub3d
 DEL     	= rm -rf
 #========================================================#
