@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
+
 
 int	ft_strlen(char *str)
 {
@@ -49,4 +50,9 @@ int	ft_strcmp(char *str1, char *str2)
 			&& str1[i] == str2[i])
 		i++;
 	return (str1[i] - str2[i]);
+}
+
+int	is_space(char c)
+{
+	return ((c >= 9 && c <= 13) || c == 32);
 }

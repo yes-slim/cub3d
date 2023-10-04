@@ -16,27 +16,21 @@ void	trim_spaces(t_data *data)
 {
 	int	y;
 	int	x;
-	int	flag;
 
 	y = data->len_map - 1;
-	flag = 0;
+	data->map_h = data->len_map;
 	while (y && data->mp[y])
 	{
 		x = 0;
 		while (data->mp[y][x])
 		{
-			if (!WHITESPACE(data->mp[y][x]))
-			{
-				flag = 1;
-				break ;
-			}
+			if (!is_space(data->mp[y][x]))
+				return ;
 			x++;
 		}
-		if (flag)
-			return ;
 		free(data->mp[y]);
 		data->mp[y] = NULL;
-		data->len_map--;
+		data->map_h = y;
 		y--;
 	}
 }

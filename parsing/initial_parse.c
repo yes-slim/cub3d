@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   initial_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/04 05:22:38 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:06:18 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 
@@ -41,6 +42,8 @@ int	init_parsing_data(t_data *data)
 	data->len_map = 0;
 	data->F = -1;
 	data->C = -1;
+	data->map_h = 0;
+	data->map_w = 0;
 	return (VALID);
 }
 

@@ -3,19 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+         #
+#    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/04 04:05:34 by mberrouk         ###   ########.fr        #
+#    Updated: 2023/10/04 20:05:22 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
-MLX		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-#MLX			=  -I ./tmp_files -g -L ./tmp_files  -l mlx -framework OpenGL -framework AppKit 
-SANITIZ		=  -fsanitize=address
-CFLAGS 	=  -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
-#CFLAGS 		=  -g3 $(SANITIZ) $(HEADER) -c 
+MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
+SANITIZ		= -fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
 NAME    	= cub3d
 DEL     	= rm -rf
 #========================================================#

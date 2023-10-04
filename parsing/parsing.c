@@ -34,13 +34,13 @@ int	get_data(t_data *data, char *arg, int flag)
 	int	len;
 
 	i = 0;
-	while (WHITESPACE(arg[i]))
+	while (is_space(arg[i]))
 		i++;
 	len = ft_strlen(arg);
 	if (!len)
 		return (-1);
 	len--;
-	while (len && WHITESPACE(arg[len]))
+	while (len && is_space(arg[len]))
 	{
 		arg[len] = '\0';
 		len--;
@@ -60,7 +60,7 @@ void	fetch_map(t_data *data, char *line, int *row_index)
 	int	i;
 
 	i = 0;
-	while (WHITESPACE(line[i]))
+	while (is_space(line[i]))
 		i++;
 	if (!line[i] && !*row_index)
 		return ;

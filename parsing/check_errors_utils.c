@@ -17,16 +17,16 @@ int	valid_space(t_data *data, int x, int y)
 	int	rowlen;
 
 	rowlen = ft_strlen(data->mp[y]);
-	if (x + 1 < rowlen && (!WHITESPACE(data->mp[y][x + 1]) \
+	if (x + 1 < rowlen && (!is_space(data->mp[y][x + 1]) \
 			&& data->mp[y][x + 1] != '1'))
 		return (ERROR);
 	if (y + 1 < data->len_map && x < ft_strlen(data->mp[y + 1]) \
-	&& (!WHITESPACE(data->mp[y + 1][x]) && data->mp[y + 1][x] != '1'))
+	&& (!is_space(data->mp[y + 1][x]) && data->mp[y + 1][x] != '1'))
 		return (ERROR);
-	if (x - 1 >= 0 && (!WHITESPACE(data->mp[y][x - 1]) \
+	if (x - 1 >= 0 && (!is_space(data->mp[y][x - 1]) \
 			&& data->mp[y][x - 1] != '1'))
 		return (ERROR);
-	if (y - 1 >= 0 && (!WHITESPACE(data->mp[y - 1][x]) \
+	if (y - 1 >= 0 && (!is_space(data->mp[y - 1][x]) \
 			&& data->mp[y - 1][x] != '1'))
 		return (ERROR);
 	return (VALID);
@@ -39,7 +39,7 @@ int	map_component(char c)
 
 	i = 0;
 	elem = "01NSEW";
-	if (WHITESPACE(c))
+	if (is_space(c))
 		return (VALID);
 	while (elem[i])
 		if (elem[i++] == c)
