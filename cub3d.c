@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/04 17:53:30 by yes-slim         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/04 05:17:27 by mberrouk         ###   ########.fr       */
->>>>>>> origin/main
+/*   Updated: 2023/10/04 20:11:04 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "./includes/cub3d.h"
 #include <unistd.h>
