@@ -12,7 +12,7 @@
 
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
 MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-SANITIZ		= -g3 #-fsanitize=address
+SANITIZ		= -g3 -fsanitize=address
 CFLAGS 		= -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
 NAME    	= cub3d
 DEL     	= rm -rf

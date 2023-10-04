@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
+#include <unistd.h>
 
 int	ft_exit(t_init *init)
 {
@@ -255,9 +256,19 @@ int main(int ac, char **av)
 	 t_data	data;
 
 	 if (init_pars(ac, av, &data) == ERROR)
-	 	return (1);
+	{	
+		printf("\033[1;31m --> ERROR\n");
+		return (1);
+	}
 	printf("c -> %d\n", data.C);
 	printf("f -> %d\n", data.F);
-	 clean_parsing_data(&data);
-	 return (0);
+	printf("x -> %f\n", data.x);
+	printf("y -> %f\n", data.y);
+	for (int i = 0; data.mp[i]; i++)
+	{
+		printf("%s\n", data.mp[i]);
+	}
+	clean_parsing_data(&data);
+	printf("\033[1;33m --> VALID\n");
+	return (0);
 }

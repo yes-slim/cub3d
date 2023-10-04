@@ -58,40 +58,77 @@ int	check_map_edge(t_data *data, int y)
 
 int	check_position(t_data *data, int y, int x)
 {
+	if (!x || !y || x == ft_strlen(data->mp[y]) - 1 \
+		|| y == data->len_map - 1)
+		return (ERROR);
+	/****/
+	if (x + 1 > ft_strlen(data->mp[y]) 
+		|| !data->mp[y][x + 1] || WHITESPACE(data->mp[y][x + 1]))
+		return (ERROR);
+	/****/
+	if (x - 1 < 0 || WHITESPACE(data->mp[y][x - 1]))
+		return (ERROR);
+	/****/
+	if (y + 1 >= data->len_map || x > ft_strlen(data->mp[y + 1]) \
+		|| !data->mp[y + 1][x] || WHITESPACE(data->mp[y + 1][x]))
+		return (ERROR);
+	/****/
+	if (x > ft_strlen(data->mp[y - 1]) || !data->mp[y - 1][x] \
+		|| WHITESPACE(data->mp[y - 1][x]))
+		return (ERROR);
+/*
 	if (x == 0 || (x - 1 >= 0 && (!data->mp[y][x - 1] \
 		|| WHITESPACE(data->mp[y][x - 1]))))
 		return (ERROR);
-	if (y == 0 || (y - 1 >= 0 && (!data->mp[y - 1][x] \
+	if (y == 0 || (y - 1 >= 0 && (ft_strlen(data->mp[y - 1]) < x || !data->mp[y - 1][x] \
 		|| WHITESPACE(data->mp[y - 1][x]))))
 		return (ERROR);
 	if (x + 1 >= ft_strlen(data->mp[y]) || (!data->mp[y][x + 1] \
 		|| WHITESPACE(data->mp[y][x + 1])))
 		return (ERROR);
-	if (y + 1 >= data->len_map || (!data->mp[y + 1][x] \
-		|| WHITESPACE(data->mp[y + 1][x])))
+	if (y + 1 >= data->len_map || ft_strlen(data->mp[y + 1]) < x
+		|| !data->mp[y + 1][x] || WHITESPACE(data->mp[y + 1][x]))
 		return (ERROR);
-	return (VALID);
+	*/return (VALID);
 }
 
 int	check_space_comp(t_data *data)
 {
 	int	x;
+	int	flag;
 	int	y;
 
 	y = 0;
+	flag = 0;
 	while (data->mp[y])
 	{
 		x = 0;
 		while (data->mp[y][x])
 		{
 			if (WHITESPACE(data->mp[y][x]) && !valid_space(data, x, y))
+			{
 				return (ERROR);
+			}
 			if (data->mp[y][x] == '0' && check_position(data, y, x) == ERROR)
 				return (ERROR);
+			else if (data->mp[y][x] == 'N' || data->mp[y][x] == 'S'
+				|| data->mp[y][x] == 'E' || data->mp[y][x] == 'W')
+			{
+				if (flag)
+					return (ERROR);
+				flag = 1;
+				if (check_position(data, y, x) == ERROR)
+					return (ERROR);
+				data->x = (float)(x * CELL) + (float)(CELL / 2);
+				data->y = ((float)y * CELL) + ((float)CELL / 2);
+				data->mp[y][x] = '0';
+			}
 			x++;
 		}
 		y++;
 	}
+	if (!flag)
+		return (ERROR);
 	return (VALID);
 }
 

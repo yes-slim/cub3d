@@ -49,6 +49,8 @@ typedef struct s_data
 	int			len_map;
 	int			F;
 	int			C;
+	float		x;
+	float		y;
     t_map		*map;
 }   t_data;
 
