@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:38:23 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/04 03:00:09 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:10:12 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ typedef struct s_data
 	int			len_map;
 	int			F;
 	int			C;
-	float		x;
-	float		y;
+	double		x;
+	double		y;
+	int			map_w;
+	int			map_h;
+	double		angel;
     t_map		*map;
 }   t_data;
 
