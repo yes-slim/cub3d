@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/10/04 17:53:30 by yes-slim         ###   ########.fr       */
+=======
+/*   Updated: 2023/10/04 05:17:27 by mberrouk         ###   ########.fr       */
+>>>>>>> origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
+#include <unistd.h>
 
 int	ft_exit(t_init *init)
 {
@@ -147,10 +152,20 @@ int main(int ac, char **av)
 	mlx_loop(init->mlx);
 	
 	// t_data	data;
-	// if (init_pars(ac, av, &data) == ERROR)
-	//  	return (1);
+	//  if (init_pars(ac, av, &data) == ERROR)
+	// {	
+	// 	//printf("\033[1;31m --> ERROR\n");
+	// 	return (1);
+	// }
 	// printf("c -> %d\n", data.C);
 	// printf("f -> %d\n", data.F);
+	// printf("x -> %f\n", data.x);
+	// printf("y -> %f\n", data.y);
+	// for (int i = 0; data.mp[i]; i++)
+	// {
+	// 	printf("%s\n", data.mp[i]);
+	// }
 	// clean_parsing_data(&data);
+	// printf("\033[1;33m --> VALID\n");
 	// return (0);
 }

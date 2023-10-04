@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:34:53 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 13:40:57 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 04:19:12 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	valid_space(t_data *data, int x, int y)
 	if (x + 1 < rowlen && (!WHITESPACE(data->mp[y][x + 1]) \
 			&& data->mp[y][x + 1] != '1'))
 		return (ERROR);
-	if (y + 1 < data->len_map && (!WHITESPACE(data->mp[y + 1][x]) \
-			&& data->mp[y + 1][x] != '1'))
+	if (y + 1 < data->len_map && x < ft_strlen(data->mp[y + 1]) \
+	&& (!WHITESPACE(data->mp[y + 1][x]) && data->mp[y + 1][x] != '1'))
 		return (ERROR);
 	if (x - 1 >= 0 && (!WHITESPACE(data->mp[y][x - 1]) \
 			&& data->mp[y][x - 1] != '1'))

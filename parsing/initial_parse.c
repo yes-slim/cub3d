@@ -6,9 +6,10 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/03 12:26:07 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:06:18 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 
@@ -52,7 +53,10 @@ void	clean_parsing_data(t_data *data)
 	{
 		i = 0;
 		while (data->mp[i])
-			free(data->mp[i++]);
+		{
+			free(data->mp[i]);
+			i++;
+		}
 		free(data->mp);
 	}
 	i = 0;
@@ -62,6 +66,7 @@ void	clean_parsing_data(t_data *data)
 			free(data->textures[i]);
 		i++;
 	}
+	free(data->textures);
 	ft_lstclear(&(data->map));
 }
 
@@ -81,7 +86,7 @@ int	init_pars(int ac, char *av[], t_data *data)
 	}
 	init_parsing_data(data);
 	flag = parsing_file(fd, data, 0, 0);
-	if (flag < 0)
+	if (flag <= 0)
 	{
 		if (flag != -2)
 			print_errmsg("Invalid args");

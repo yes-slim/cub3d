@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 23:36:33 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 13:40:57 by yes-slim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/cub3d.h"
 
 int	valid_form(char *arg, int j, int comma)
@@ -78,7 +66,7 @@ int	get_floor_ceiling(t_data *data, char *arg, int flag)
 	i = 0;
 	while (WHITESPACE(arg[i]))
 		i++;
-	value = floor_ceiling_value(&arg[i], 0, 16, i);
+	value = floor_ceiling_value(arg, 0, 16, i);
 	if (value == -1)
 		return (-1);
 	if (flag == F)

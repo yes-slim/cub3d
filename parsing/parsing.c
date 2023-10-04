@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 21:15:22 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/02 13:40:57 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/04 04:20:17 by mberrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_data(t_data *data, char *arg, int flag)
 	i = 0;
 	while (WHITESPACE(arg[i]))
 		i++;
-	len = ft_strlen(&arg[i]);
+	len = ft_strlen(arg);
 	if (!len)
 		return (-1);
 	len--;
@@ -45,11 +45,13 @@ int	get_data(t_data *data, char *arg, int flag)
 		arg[len] = '\0';
 		len--;
 	}
-	if (len < 3 || ft_strcmp(&arg[len - 3], ".xpm" ))
+	if (len < 4 || ft_strcmp(&arg[len - 3], ".xpm" ))
+	{
 		return (-1);
+	}
 	if (check_opening_files(&arg[i]) == -2)
 		return (-2);
-	data->textures[flag] = ft_strdup(arg); 
+	data->textures[flag] = ft_strdup(&arg[i]);
 	return (VALID);
 }
 
