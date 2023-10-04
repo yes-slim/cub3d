@@ -133,6 +133,7 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
+	/*
 	t_init	*init = malloc(sizeof(t_init));
 	init->img = malloc(sizeof(t_img));
 	init->keys = malloc(sizeof(t_keys));
@@ -147,22 +148,31 @@ int main(int ac, char **av)
 	draw_player(init);
 	ft_hook(init);
 	mlx_loop(init->mlx);
-	
-	// t_data	data;
-	//  if (init_pars(ac, av, &data) == ERROR)
-	// {	
-	// 	//printf("\033[1;31m --> ERROR\n");
-	// 	return (1);
-	// }
-	// printf("c -> %d\n", data.C);
-	// printf("f -> %d\n", data.F);
-	// printf("x -> %f\n", data.x);
-	// printf("y -> %f\n", data.y);
-	// for (int i = 0; data.mp[i]; i++)
-	// {
-	// 	printf("%s\n", data.mp[i]);
-	// }
-	// clean_parsing_data(&data);
-	// printf("\033[1;33m --> VALID\n");
-	// return (0);
+	*/
+	t_data	data;
+	 if (init_pars(ac, av, &data) == ERROR)
+	{	
+		//printf("\033[1;31m --> ERROR\n");
+		return (1);
+	}
+	printf("c -> %d\n", data.C);
+	printf("f -> %d\n", data.F);
+	printf("x -> %f\n", data.x);
+	printf("y -> %f\n", data.y);
+	printf("data.map_h -> %d\n", data.map_h);
+	printf("data.map_w -> %d\n", data.map_w);
+	printf("data.angel -> %f\n", data.angel);
+	printf("<------------ textures paths : ----------->\n");
+	printf("WE: %s\n", data.textures[WE]);
+	printf("SO: %s\n", data.textures[SO]);
+	printf("NO: %s\n", data.textures[NO]);
+	printf("EA: %s\n", data.textures[EA]);
+	printf("<------------ map : ----------->\n");
+	for (int i = 0; data.mp[i]; i++)
+	{
+		printf("%s\n", data.mp[i]);
+	}
+	clean_parsing_data(&data);
+	printf("\033[1;33m --> VALID\n");
+	return (0);
 }
