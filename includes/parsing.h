@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:38:23 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/04 20:10:12 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/05 01:36:12 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define BUFFER_SIZE 1024
 # define ERROR 0
 # define VALID 1
-# define WHITESPACE(c) ((c >= 9 && c <= 13) || c == 32)
-# define ISNUMERIC(c) (c >= '0' && c <= '9')
 
 enum Textures 
 {
@@ -64,10 +62,13 @@ int	check_map(t_data *data, int len, int j);
 /****get_next_line.c****/
 char	*get_next_line(int fd);
 
-/****str_utils.c****/
+/****str_utils_1.c****/
 int		ft_strlen(char *str);
 int		ft_strchr(char *s, char c);
 int		ft_strcmp(char *str1, char *str2);
+int		is_space(char c);
+
+/****str_utils.c****/
 char	*ft_strjoin(char *s1, char *s2, int len);
 char	*ft_strdup(char *s1);
 

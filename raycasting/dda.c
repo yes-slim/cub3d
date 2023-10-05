@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:18:19 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/04 17:27:01 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:07:11 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ double	dda_v(t_init *init, double ra)
 		ver_y = tan(ra)*(ver_x - init->px) + init->py;
 	}
 	dis_v = sqrt((ver_x-init->px)*(ver_x-init->px) + (ver_y-init->py)*(ver_y-init->py));
+	init->inter_x = ver_x;
+	init->inter_y = ver_y;
 	return (dis_v);
 }
 
@@ -56,6 +58,8 @@ double	dda_h(t_init *init, double ra)
 		
 	}
 	dis_h = sqrt((hor_x-init->px)*(hor_x-init->px) + (hor_y-init->py)*(hor_y-init->py));
+	init->inter_x = hor_x;
+	init->inter_y = hor_y;
 	return (dis_h);
 }
 
@@ -63,22 +67,22 @@ double	dda(t_init *init, double ra)
 {
 	double	dis;
 	double	w_hei;
-	double dis_v;
-	double  dis_h;	
+	double	dis_v;
+	double	dis_h;	
 	
 	dis_v = dda_v(init, ra);
 	dis_h = dda_h(init, ra);
 	if (dis_h > dis_v)
-		dis = dis_v;
+	{
+		dis = dda_v(init, ra);
+		init->inter	= VERTICAL;
+	}
 	else
-		dis = dis_h;
+	{
+		dis = dda_h(init, ra);
+		init->inter = HORIZONTAL;	
+	}
 	dis *= cos(ra - init->pa);
     w_hei = (S_HEI * 30) / dis;
-	if (w_hei > S_HEI)
-		w_hei = S_HEI;
-	// if (ra == init->pa - get_rad(FOV/2))
-	// 	printf("++++++++%f\n", w_hei);
-	// if (ra == (init->pa - get_rad(FOV/2)) + (get_rad((double)FOV / (double)(NUM_RAYS))))
-	// 	printf("--------%f\n", w_hei);
 	return (w_hei);
 }

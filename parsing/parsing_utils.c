@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/05 00:21:02 by mberrouk          #+#    #+#             */
+/*   Updated: 2023/10/05 01:37:17 by yes-slim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int	valid_form(char *arg, int j, int comma)
 {
 	return (comma > 2 || (arg[j] != ',' && ((arg[j] < '0' || arg[j] > '9') \
-						&& (!WHITESPACE(arg[j])))) || (arg[j] == ','\
+						&& (!is_space(arg[j])))) || (arg[j] == ','\
 						&& (!arg[j + 1] || arg[j + 1] == ','\
 						|| arg[j + 1] == '\n')));
 }
@@ -14,7 +26,7 @@ int	convert_rgb(char *arg, int conver)
 	int	value;
 
 	i = 0;
-	while (WHITESPACE(arg[i]))
+	while (is_space(arg[i]))
 		i++;
 	value = ft_atoi(&arg[i]);
 	if (!arg[i] || value < 0 || value > 255)
@@ -64,7 +76,7 @@ int	get_floor_ceiling(t_data *data, char *arg, int flag)
 	int	value;
 
 	i = 0;
-	while (WHITESPACE(arg[i]))
+	while (is_space(arg[i]))
 		i++;
 	value = floor_ceiling_value(arg, 0, 16, i);
 	if (value == -1)
@@ -83,11 +95,11 @@ int	check_arg(t_data *data, char *line)
 
 	i = 0;
 	j = 0;
-	while (WHITESPACE(line[i]))
+	while (is_space(line[i]))
 		i++;
 	if (!line[i])
 		return (0);
-	while (line[i + j] && !WHITESPACE(line[i + j]))
+	while (line[i + j] && !is_space(line[i + j]))
 		j++;
 	line[i + j++] = '\0';
 	if (!ft_strcmp(&line[i], "NO") && !data->textures[NO])

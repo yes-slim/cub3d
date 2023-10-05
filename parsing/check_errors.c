@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:36:30 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/04 05:27:37 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/05 01:36:36 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	check_map_edge(t_data *data, int y)
 {
@@ -28,12 +28,12 @@ int	check_map_edge(t_data *data, int y)
 	}
 	else
 	{
-		while (WHITESPACE(data->mp[y][x]))
+		while (is_space(data->mp[y][x]))
 			x++;
 		if (data->mp[y][x] != '1')
 			return (ERROR);
 		x = ft_strlen(data->mp[y]) - 1;
-		while (WHITESPACE(data->mp[y][x]))
+		while (is_space(data->mp[y][x]))
 			x--;
 		if (data->mp[y][x] != '1')
 			return (ERROR);
@@ -48,33 +48,45 @@ int	check_position(t_data *data, int y, int x)
 		return (ERROR);
 	/****/
 	if (x + 1 > ft_strlen(data->mp[y]) 
-		|| !data->mp[y][x + 1] || WHITESPACE(data->mp[y][x + 1]))
+		|| !data->mp[y][x + 1] || is_space(data->mp[y][x + 1]))
 		return (ERROR);
 	/****/
-	if (x - 1 < 0 || WHITESPACE(data->mp[y][x - 1]))
+	if (x - 1 < 0 || is_space(data->mp[y][x - 1]))
 		return (ERROR);
 	/****/
 	if (y + 1 >= data->len_map || x > ft_strlen(data->mp[y + 1]) \
-		|| !data->mp[y + 1][x] || WHITESPACE(data->mp[y + 1][x]))
+		|| !data->mp[y + 1][x] || is_space(data->mp[y + 1][x]))
 		return (ERROR);
 	/****/
 	if (x > ft_strlen(data->mp[y - 1]) || !data->mp[y - 1][x] \
-		|| WHITESPACE(data->mp[y - 1][x]))
+		|| is_space(data->mp[y - 1][x]))
 		return (ERROR);
 /*
 	if (x == 0 || (x - 1 >= 0 && (!data->mp[y][x - 1] \
-		|| WHITESPACE(data->mp[y][x - 1]))))
+		|| is_space(data->mp[y][x - 1]))))
 		return (ERROR);
 	if (y == 0 || (y - 1 >= 0 && (ft_strlen(data->mp[y - 1]) < x || !data->mp[y - 1][x] \
-		|| WHITESPACE(data->mp[y - 1][x]))))
+		|| is_space(data->mp[y - 1][x]))))
 		return (ERROR);
 	if (x + 1 >= ft_strlen(data->mp[y]) || (!data->mp[y][x + 1] \
-		|| WHITESPACE(data->mp[y][x + 1])))
+		|| is_space(data->mp[y][x + 1])))
 		return (ERROR);
 	if (y + 1 >= data->len_map || ft_strlen(data->mp[y + 1]) < x
-		|| !data->mp[y + 1][x] || WHITESPACE(data->mp[y + 1][x]))
+		|| !data->mp[y + 1][x] || is_space(data->mp[y + 1][x]))
 		return (ERROR);
 	*/return (VALID);
+}
+
+void	direc_angle(t_data *data, char symbol)
+{
+	if (symbol == 'N')
+		data->angel = get_rad(90);
+	if (symbol == 'E')
+		data->angel = get_rad(0);
+	if (symbol == 'W')
+		data->angel = get_rad(180);
+	if (symbol == 'S')
+		data->angel = get_rad(270);
 }
 
 int	check_space_comp(t_data *data)
@@ -90,7 +102,7 @@ int	check_space_comp(t_data *data)
 		x = 0;
 		while (data->mp[y][x])
 		{
-			if (WHITESPACE(data->mp[y][x]) && !valid_space(data, x, y))
+			if (is_space(data->mp[y][x]) && !valid_space(data, x, y))
 			{
 				return (ERROR);
 			}
@@ -106,6 +118,7 @@ int	check_space_comp(t_data *data)
 					return (ERROR);
 				data->x = (double)(x * CELL) + ((double)CELL / 2);
 				data->y = (double)(y * CELL) + ((double)CELL / 2);
+				direc_angle(data, data->mp[y][x]);
 				data->mp[y][x] = '0';
 			}
 			x++;
@@ -141,6 +154,8 @@ int	check_map(t_data *data, int len, int j)
 		}
 		if (i)
 			tmp->row[i] = '\0';
+		if (i > data->map_w)
+			data->map_w = i;
 		data->mp[j] = ft_strdup(tmp->row);
 		tmp = tmp->next;
 		j++;

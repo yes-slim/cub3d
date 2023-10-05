@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 21:15:22 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/04 04:20:17 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:22:10 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/parsing.h"
+#include "cub3d.h"
 
 int	check_opening_files(char *path)
 {
@@ -34,13 +33,13 @@ int	get_data(t_data *data, char *arg, int flag)
 	int	len;
 
 	i = 0;
-	while (WHITESPACE(arg[i]))
+	while (is_space(arg[i]))
 		i++;
 	len = ft_strlen(arg);
 	if (!len)
 		return (-1);
 	len--;
-	while (len && WHITESPACE(arg[len]))
+	while (len && is_space(arg[len]))
 	{
 		arg[len] = '\0';
 		len--;
@@ -60,7 +59,7 @@ void	fetch_map(t_data *data, char *line, int *row_index)
 	int	i;
 
 	i = 0;
-	while (WHITESPACE(line[i]))
+	while (is_space(line[i]))
 		i++;
 	if (!line[i] && !*row_index)
 		return ;

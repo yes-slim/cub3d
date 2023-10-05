@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/04 17:53:38 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:03:54 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@
 # include <unistd.h>
 # include <string.h>
 # include <math.h>
+# include <stdbool.h>
 
+/*****MACROS****/
 # define CELL 16
 # define FOV 60
-# define POV 0
+# define POV 270
 # define S_HEI 768
 # define S_WID 1536
 # define NUM_RAYS S_WID
+/*****keyword****/
+# define VERTICAL true
+# define HORIZONTAL false
 /*****keycode****/
 # define KEY_W 119
 # define KEY_A 97
@@ -39,8 +44,11 @@
 # define KEY_ESC 65307
 
 
+
 typedef struct	s_img {
 	void	*img;
+	int		img_w;
+	int		img_h;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -66,7 +74,11 @@ typedef struct s_init
 	double	pa;
 	int		mh;
 	int		mw;
+	bool	inter;
+	double	inter_x;
+	double	inter_y;
 	t_img	*img;
+	t_img	*brick;
 	t_keys	*keys;
 }	t_init;
 
