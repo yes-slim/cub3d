@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/05 20:04:53 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:12:19 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	draw_walls(t_init *init, double distance, int x)
 	int x_t = get_texture_x(init), y_t;
 	y = 0;
 	while (y>=0 && y < w_start)
-		my_mlx_pixel_put(init->img, x, y++, 0xFFFFFF);
+		my_mlx_pixel_put(init->img, x, y++, 0xFFBC62);
 	while (y >= w_start && y < w_end)
 	{
 		y_t = get_texture_y(init, distance, y);
@@ -77,7 +77,7 @@ void	draw_walls(t_init *init, double distance, int x)
 		my_mlx_pixel_put(init->img, x, y++, color);
 	}
 	while (y>=w_end && y <= S_HEI)
-		my_mlx_pixel_put(init->img, x, y++, 0xFFFFFF);
+		my_mlx_pixel_put(init->img, x, y++, 0x62B3FF);
 }
 
 void	draw_player(t_init *init)
