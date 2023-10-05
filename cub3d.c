@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/05 22:29:17 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/05 23:57:03 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,48 +162,48 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
-	t_init	*init = malloc(sizeof(t_init));
-	init->img = malloc(sizeof(t_img));
-	init->brick = malloc(sizeof(t_img));
-	init->keys = malloc(sizeof(t_keys));
-	init->map = get_map();
-	init->mh = 15, init->mw =strlen(init->map[0]);
-	init->px = 13*CELL + CELL/2, init->py =7*CELL + CELL/2 ;
-	init->pa = get_rad(-90);
-	init->mlx = mlx_init();
-	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
-	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
-	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
-	init->brick->img = mlx_xpm_file_to_image(init->mlx, "./textures/Bricks.xpm", &init->brick->img_w, &init->brick->img_h);
-	init->brick->addr = mlx_get_data_addr(init->brick->img, &init->brick->bits_per_pixel, &init->brick->line_length, &init->brick->endian);
-	draw_player(init);
-	ft_hook(init);
-	mlx_loop(init->mlx);
+	// t_init	*init = malloc(sizeof(t_init));
+	// init->img = malloc(sizeof(t_img));
+	// init->brick = malloc(sizeof(t_img));
+	// init->keys = malloc(sizeof(t_keys));
+	// init->map = get_map();
+	// init->mh = 15, init->mw =strlen(init->map[0]);
+	// init->px = 13*CELL + CELL/2, init->py =7*CELL + CELL/2 ;
+	// init->pa = get_rad(-90);
+	// init->mlx = mlx_init();
+	// init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
+	// init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
+	// init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
+	// init->brick->img = mlx_xpm_file_to_image(init->mlx, "./textures/Bricks.xpm", &init->brick->img_w, &init->brick->img_h);
+	// init->brick->addr = mlx_get_data_addr(init->brick->img, &init->brick->bits_per_pixel, &init->brick->line_length, &init->brick->endian);
+	// draw_player(init);
+	// ft_hook(init);
+	// mlx_loop(init->mlx);
 /*=============================================================================================*/
-	// t_data	data;
-	//  if (init_pars(ac, av, &data) == ERROR)
-	// {	
-	// 	printf("\033[1;31m --> ERROR\n");
-	// 	return (1);
-	// }
-	// printf("c -> %d\n", data.C);
-	// printf("f -> %d\n", data.F);
-	// printf("x -> %f\n", data.x);
-	// printf("y -> %f\n", data.y);
-	// printf("data.map_h -> %d\n", data.map_h);
-	// printf("data.map_w -> %d\n", data.map_w);
-	// printf("data.angel -> %f\n", data.angel);
-	// printf("<------------ textures paths : ----------->\n");
-	// printf("WE: %s\n", data.textures[WE]);
-	// printf("SO: %s\n", data.textures[SO]);
-	// printf("NO: %s\n", data.textures[NO]);
-	// printf("EA: %s\n", data.textures[EA]);
-	// printf("<------------ map : ----------->\n");
-	// for (int i = 0; data.mp[i]; i++)
-	// {
-	// 	printf("%s\n", data.mp[i]);
-	// }
-	// clean_parsing_data(&data);
-	// printf("\033[1;33m --> VALID\n");
-	// return (0);
+	t_data	data;
+	 if (init_pars(ac, av, &data) == ERROR)
+	{	
+		printf("\033[1;31m --> ERROR\n");
+		return (1);
+	}
+	printf("c -> %d\n", data.C);
+	printf("f -> %d\n", data.F);
+	printf("x -> %f\n", data.x);
+	printf("y -> %f\n", data.y);
+	printf("data.map_h -> %d\n", data.map_h);
+	printf("data.map_w -> %d\n", data.map_w);
+	printf("data.angel -> %f\n", data.angel);
+	printf("<------------ textures paths : ----------->\n");
+	printf("WE: %s\n", data.textures[WE]);
+	printf("SO: %s\n", data.textures[SO]);
+	printf("NO: %s\n", data.textures[NO]);
+	printf("EA: %s\n", data.textures[EA]);
+	printf("<------------ map : ----------->\n");
+	for (int i = 0; data.mp[i]; i++)
+	{
+		printf("%s\n", data.mp[i]);
+	}
+	clean_parsing_data(&data);
+	printf("\033[1;33m --> VALID\n");
+	return (0);
 }
