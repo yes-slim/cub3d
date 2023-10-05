@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/05 19:11:28 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:04:53 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ int main(int ac, char **av)
 	init->img = malloc(sizeof(t_img));
 	init->brick = malloc(sizeof(t_img));
 	init->keys = malloc(sizeof(t_keys));
-	
 	init->map = get_map();
 	init->mh = 15, init->mw =strlen(init->map[0]);
 	init->px = 13*CELL + CELL/2, init->py =7*CELL + CELL/2 ;
