@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:18:19 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 16:40:35 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 00:32:39 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ double	dda_v(t_init *init, double ra)
 	{
 		if (init->map[(int)ver_y/CELL][(int)ver_x/CELL] == '1')
 			break ;
-		if (init->map[(int)ver_y/CELL][(int)ver_x/CELL -1] == '1')
+		if (init->map[(int)ver_y/CELL][(int)(ver_x)/CELL -1] == '1')
 			break ;
 		ver_x -= CELL;
 		if (cos(ra) > 0)
@@ -82,7 +82,7 @@ double	dda(t_init *init, double ra)
 		dis = dda_h(init, ra);
 		init->inter = HORIZONTAL;	
 	}
-	dis *= cos(ra - init->pa);
-    w_hei = (S_HEI * 30) / dis;
+	dis *= cos(init->pa - ra);
+    w_hei = (S_HEI * CELL) / dis;
 	return (w_hei);
 }

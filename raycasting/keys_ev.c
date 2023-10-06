@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 01:28:01 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 16:54:48 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 00:42:27 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,12 @@ int	move_player(t_init *init)
 	if (init->keys->m_W == 1 || init->keys->m_S == 1 ||
 		init->keys->m_D == 1 || init->keys->m_A == 1)
 		move(init, &p_cos, &p_sin, spd);
-	if (init->map[(int)(init->py)/CELL][(int)((init->px+p_cos)/CELL)] == '0')
-		init->px += p_cos;
-	if (init->map[(int)(init->py + p_sin)/CELL][(int)(oldx/CELL)] == '0')
+	if (init->map[(int)(init->py + 5 + p_sin) / CELL][(int)(oldx / CELL)] != '1' &&
+		init->map[(int)(init->py - 5 + p_sin) / CELL][(int)(oldx / CELL)] != '1')
 		init->py += p_sin;
+	if (init->map[(int)(init->py) / CELL][(int)((init->px + 5 + p_cos) / CELL)] != '1' &&
+		init->map[(int)(init->py) / CELL][(int)((init->px - 5 + p_cos) / CELL)] != '1')
+		init->px += p_cos;
 	move_angel(init);
 	draw_player(init);
 	return (0);

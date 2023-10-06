@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/04 20:05:22 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/06 23:17:38 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS)))
 RC			= dda helpers_1 mouse_ev keys_ev ft_split
 RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC)))
 #==================Scrs===============================================#
-SRCS		= $(RC_SRCS) $(Pars_SRCS) $(MLX_SRCS)
+SRCS		= init.c $(RC_SRCS) $(Pars_SRCS) $(MLX_SRCS)
 #====================================================================#
 OBJ     	= $(SRCS:.c=.o)
 #=========================compile=============================#

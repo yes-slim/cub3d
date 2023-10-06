@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 16:51:22 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 23:17:09 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <stdbool.h>
 
 /*****MACROS****/
-# define CELL 32
+# define CELL 64
 # define FOV 60
 # define POV 270
-# define S_HEI 720 //768
-# define S_WID 1080  //1536
+# define S_HEI 768
+# define S_WID 1536
 # define NUM_RAYS S_WID
 /*****keyword****/
 # define VERTICAL true
@@ -69,6 +69,8 @@ typedef struct s_init
 	void	*mlx;
 	void	*win;
 	char	**map;
+	int		F_clr;
+	int		C_clr;
 	double	px;
 	double	py;
 	double	pa;
@@ -90,6 +92,7 @@ typedef struct s_init
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		get_pixel_color(t_img *img, int x, int y);
 /****helpers****/
+void	ft_init(t_init *raycast, t_data *parse);
 double	dda(t_init *init, double ra);
 int 	key_pressed(int keycode, t_init *init);
 int		key_release(int keycode, t_init *init);
@@ -98,8 +101,5 @@ void	draw_map(t_init *init);
 void	draw_player(t_init *init);
 int		ft_exit(t_init *init);
 double	get_rad(double angel);
-/****libft****/
-char	*_strjoin(char const *s1, char const *s2);
-char	**ft_split(char const *s, char c);
 
 #endif
