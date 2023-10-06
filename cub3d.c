@@ -6,11 +6,30 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/05 23:57:03 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:07:57 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_img	*get_texture(t_init *init, int r_ang)
+{
+	if (init->inter == VERTICAL)
+	{
+		if (cos(r_ang) >= 0)
+			return (init->East);
+		else
+			return (init->West);
+	}
+	if (init->inter == HORIZONTAL)
+	{
+		if (sin(r_ang) >= 0)
+			return (init->North);
+		else
+			return (init->South);
+	}
+	return (NULL);
+}
 
 int	get_texture_x(t_init *init)
 {
@@ -57,7 +76,7 @@ int	mouse_move(t_init *init)
 	return (0);
 }
 
-void	draw_walls(t_init *init, double distance, int x)
+void	draw_walls(t_init *init, double distance, int x, int r_ang)
 {
 	int w_start = (S_HEI/2 - distance/2);
 	int w_end = (S_HEI/2 + distance/2);
@@ -73,7 +92,7 @@ void	draw_walls(t_init *init, double distance, int x)
 	while (y >= w_start && y < w_end)
 	{
 		y_t = get_texture_y(init, distance, y);
-		int color = get_pixel_color(init->brick, x_t, y_t);
+		int color = get_pixel_color(get_texture(init, r_ang), x_t, y_t);
 		my_mlx_pixel_put(init->img, x, y++, color);
 	}
 	while (y>=w_end && y <= S_HEI)
@@ -94,16 +113,16 @@ void	draw_player(t_init *init)
 		if (init->pa < 0)
 			init->pa += 2 * M_PI;
 		distance = dda(init, rp1);
-		draw_walls(init, distance, x);
+		draw_walls(init, distance, x, rp1);
 		x++;
 		rp1 += rot_a;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	// draw_map(init);
-	// mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
-	// mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
-	// mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
-	// mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
+	draw_map(init);
+	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
 }
 
 void	draw_map(t_init *init)
@@ -162,23 +181,43 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
-	// t_init	*init = malloc(sizeof(t_init));
-	// init->img = malloc(sizeof(t_img));
-	// init->brick = malloc(sizeof(t_img));
-	// init->keys = malloc(sizeof(t_keys));
-	// init->map = get_map();
-	// init->mh = 15, init->mw =strlen(init->map[0]);
-	// init->px = 13*CELL + CELL/2, init->py =7*CELL + CELL/2 ;
-	// init->pa = get_rad(-90);
-	// init->mlx = mlx_init();
-	// init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
-	// init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
-	// init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
-	// init->brick->img = mlx_xpm_file_to_image(init->mlx, "./textures/Bricks.xpm", &init->brick->img_w, &init->brick->img_h);
-	// init->brick->addr = mlx_get_data_addr(init->brick->img, &init->brick->bits_per_pixel, &init->brick->line_length, &init->brick->endian);
-	// draw_player(init);
-	// ft_hook(init);
-	// mlx_loop(init->mlx);
+	t_init	*init = malloc(sizeof(t_init));
+	init->img = malloc(sizeof(t_img));
+	init->keys = malloc(sizeof(t_keys));
+	
+	init->map = get_map();
+	init->mh = 15, init->mw =strlen(init->map[0]);
+	init->px = 1*CELL + CELL/2, init->py =1*CELL + CELL/2 ;
+	init->pa = get_rad(-90);
+	
+	init->mlx = mlx_init();
+	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
+	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
+	init->img->addr = mlx_get_data_addr(init->img->img, &init->img->bits_per_pixel, &init->img->line_length, &init->img->endian);
+	
+	init->brick = malloc(sizeof(t_img));
+	init->brick->img = mlx_xpm_file_to_image(init->mlx, "./textures/Bricks.xpm", &init->brick->img_w, &init->brick->img_h);
+	init->brick->addr = mlx_get_data_addr(init->brick->img, &init->brick->bits_per_pixel, &init->brick->line_length, &init->brick->endian);
+
+	init->North = malloc(sizeof(t_img));
+	init->North->img = mlx_xpm_file_to_image(init->mlx, "./textures/North.xpm", &init->North->img_w, &init->North->img_h);
+	init->North->addr = mlx_get_data_addr(init->North->img, &init->North->bits_per_pixel, &init->North->line_length, &init->North->endian);
+
+	init->South = malloc(sizeof(t_img));
+	init->South->img = mlx_xpm_file_to_image(init->mlx, "./textures/South.xpm", &init->South->img_w, &init->South->img_h);
+	init->South->addr = mlx_get_data_addr(init->South->img, &init->South->bits_per_pixel, &init->South->line_length, &init->South->endian);
+
+	init->East = malloc(sizeof(t_img));
+	init->East->img = mlx_xpm_file_to_image(init->mlx, "./textures/East.xpm", &init->East->img_w, &init->East->img_h);
+	init->East->addr = mlx_get_data_addr(init->East->img, &init->East->bits_per_pixel, &init->East->line_length, &init->East->endian);
+
+	init->West = malloc(sizeof(t_img));
+	init->West->img = mlx_xpm_file_to_image(init->mlx, "./textures/West.xpm", &init->West->img_w, &init->West->img_h);
+	init->West->addr = mlx_get_data_addr(init->West->img, &init->West->bits_per_pixel, &init->West->line_length, &init->West->endian);
+	
+	draw_player(init);
+	ft_hook(init);
+	mlx_loop(init->mlx);
 /*=============================================================================================*/
 	t_data	data;
 	 if (init_pars(ac, av, &data) == ERROR)

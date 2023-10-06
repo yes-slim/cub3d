@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/05 23:55:32 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:04:07 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef struct s_init
 	double	inter_y;
 	t_img	*img;
 	t_img	*brick;
+	t_img	*South;
+	t_img	*North;
+	t_img	*East;
+	t_img	*West;
 	t_keys	*keys;
 }	t_init;
 
