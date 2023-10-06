@@ -6,19 +6,19 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 01:07:57 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:35:38 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img	*get_texture(t_init *init, int r_ang)
+t_img	*get_texture(t_init *init, double r_ang)
 {
 	if (init->inter == VERTICAL)
 	{
 		if (cos(r_ang) >= 0)
 			return (init->East);
-		else
+		
 			return (init->West);
 	}
 	if (init->inter == HORIZONTAL)
