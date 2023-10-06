@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:34:53 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/05 00:18:20 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:49:54 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	valid_space(t_data *data, int x, int y)
 {

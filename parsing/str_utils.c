@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:21:09 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/04 02:56:12 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:22:02 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	ft_strlcpy(char *dest, char *src, int dstsize)
 {
