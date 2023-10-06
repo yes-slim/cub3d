@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 01:35:38 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:49:38 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
+	/*
 	t_init	*init = malloc(sizeof(t_init));
 	init->img = malloc(sizeof(t_img));
 	init->keys = malloc(sizeof(t_keys));
