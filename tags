@@ -64,6 +64,7 @@ key_release	raycasting/keys_ev.c	/^int key_release(int keycode, t_init *init)$/;
 main	cub3d.c	/^int main(int ac, char **av)$/;"	f	typeref:typename:int
 map_component	parsing/check_errors_utils.c	/^int	map_component(char c)$/;"	f	typeref:typename:int
 mouse_move	cub3d.c	/^int	mouse_move(t_init *init)$/;"	f	typeref:typename:int
+mouse_process	cub3d.c	/^int	mouse_process(t_init *init)$/;"	f	typeref:typename:int
 move	raycasting/keys_ev.c	/^void	move(t_init *init, double *p_cos, double *p_sin, int spd)$/;"	f	typeref:typename:void
 move_angel	raycasting/keys_ev.c	/^void	move_angel(t_init *init)$/;"	f	typeref:typename:void
 move_player	raycasting/keys_ev.c	/^int	move_player(t_init *init)$/;"	f	typeref:typename:int

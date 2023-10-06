@@ -64,6 +64,7 @@ char	*get_next_line(int fd);
 
 /****str_utils_1.c****/
 int		ft_strlen(char *str);
+int		ft_strlcpy(char *dest, char *src, int dstsize);
 int		ft_strchr(char *s, char c);
 int		ft_strcmp(char *str1, char *str2);
 int		is_space(char c);
