@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   initial_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberrouk <mberrouk@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/05 00:20:35 by mberrouk         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:50:08 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	print_errmsg(char *msg)
 {
