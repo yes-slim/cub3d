@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 01:49:38 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:51:49 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ void	draw_player(t_init *init)
 		rp1 += rot_a;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	draw_map(init);
-	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
-	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
-	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
-	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
+	// draw_map(init);
+	// mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
+	// mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
+	// mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
+	// mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
 }
 
 void	draw_map(t_init *init)
@@ -181,15 +181,14 @@ char **get_map(void)
 
 int main(int ac, char **av)
 {
-	/*
 	t_init	*init = malloc(sizeof(t_init));
 	init->img = malloc(sizeof(t_img));
 	init->keys = malloc(sizeof(t_keys));
 	
 	init->map = get_map();
 	init->mh = 15, init->mw =strlen(init->map[0]);
-	init->px = 1*CELL + CELL/2, init->py =1*CELL + CELL/2 ;
-	init->pa = get_rad(-90);
+	init->px = 10*CELL + CELL/2, init->py =5*CELL + CELL/2 ;
+	init->pa = get_rad(0);
 	
 	init->mlx = mlx_init();
 	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
@@ -201,49 +200,49 @@ int main(int ac, char **av)
 	init->brick->addr = mlx_get_data_addr(init->brick->img, &init->brick->bits_per_pixel, &init->brick->line_length, &init->brick->endian);
 
 	init->North = malloc(sizeof(t_img));
-	init->North->img = mlx_xpm_file_to_image(init->mlx, "./textures/North.xpm", &init->North->img_w, &init->North->img_h);
+	init->North->img = mlx_xpm_file_to_image(init->mlx, "./textures/WALL0.xpm", &init->North->img_w, &init->North->img_h);
 	init->North->addr = mlx_get_data_addr(init->North->img, &init->North->bits_per_pixel, &init->North->line_length, &init->North->endian);
 
 	init->South = malloc(sizeof(t_img));
-	init->South->img = mlx_xpm_file_to_image(init->mlx, "./textures/South.xpm", &init->South->img_w, &init->South->img_h);
+	init->South->img = mlx_xpm_file_to_image(init->mlx, "./textures/WALL2.xpm", &init->South->img_w, &init->South->img_h);
 	init->South->addr = mlx_get_data_addr(init->South->img, &init->South->bits_per_pixel, &init->South->line_length, &init->South->endian);
 
 	init->East = malloc(sizeof(t_img));
-	init->East->img = mlx_xpm_file_to_image(init->mlx, "./textures/East.xpm", &init->East->img_w, &init->East->img_h);
+	init->East->img = mlx_xpm_file_to_image(init->mlx, "./textures/WALL4.xpm", &init->East->img_w, &init->East->img_h);
 	init->East->addr = mlx_get_data_addr(init->East->img, &init->East->bits_per_pixel, &init->East->line_length, &init->East->endian);
 
 	init->West = malloc(sizeof(t_img));
-	init->West->img = mlx_xpm_file_to_image(init->mlx, "./textures/West.xpm", &init->West->img_w, &init->West->img_h);
+	init->West->img = mlx_xpm_file_to_image(init->mlx, "./textures/WALL46.xpm", &init->West->img_w, &init->West->img_h);
 	init->West->addr = mlx_get_data_addr(init->West->img, &init->West->bits_per_pixel, &init->West->line_length, &init->West->endian);
 	
 	draw_player(init);
 	ft_hook(init);
 	mlx_loop(init->mlx);
 /*=============================================================================================*/
-	t_data	data;
-	 if (init_pars(ac, av, &data) == ERROR)
-	{	
-		printf("\033[1;31m --> ERROR\n");
-		return (1);
-	}
-	printf("c -> %d\n", data.C);
-	printf("f -> %d\n", data.F);
-	printf("x -> %f\n", data.x);
-	printf("y -> %f\n", data.y);
-	printf("data.map_h -> %d\n", data.map_h);
-	printf("data.map_w -> %d\n", data.map_w);
-	printf("data.angel -> %f\n", data.angel);
-	printf("<------------ textures paths : ----------->\n");
-	printf("WE: %s\n", data.textures[WE]);
-	printf("SO: %s\n", data.textures[SO]);
-	printf("NO: %s\n", data.textures[NO]);
-	printf("EA: %s\n", data.textures[EA]);
-	printf("<------------ map : ----------->\n");
-	for (int i = 0; data.mp[i]; i++)
-	{
-		printf("%s\n", data.mp[i]);
-	}
-	clean_parsing_data(&data);
-	printf("\033[1;33m --> VALID\n");
-	return (0);
+	// t_data	data;
+	//  if (init_pars(ac, av, &data) == ERROR)
+	// {	
+	// 	printf("\033[1;31m --> ERROR\n");
+	// 	return (1);
+	// }
+	// printf("c -> %d\n", data.C);
+	// printf("f -> %d\n", data.F);
+	// printf("x -> %f\n", data.x);
+	// printf("y -> %f\n", data.y);
+	// printf("data.map_h -> %d\n", data.map_h);
+	// printf("data.map_w -> %d\n", data.map_w);
+	// printf("data.angel -> %f\n", data.angel);
+	// printf("<------------ textures paths : ----------->\n");
+	// printf("WE: %s\n", data.textures[WE]);
+	// printf("SO: %s\n", data.textures[SO]);
+	// printf("NO: %s\n", data.textures[NO]);
+	// printf("EA: %s\n", data.textures[EA]);
+	// printf("<------------ map : ----------->\n");
+	// for (int i = 0; data.mp[i]; i++)
+	// {
+	// 	printf("%s\n", data.mp[i]);
+	// }
+	// clean_parsing_data(&data);
+	// printf("\033[1;33m --> VALID\n");
+	// return (0);
 }

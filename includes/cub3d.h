@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 01:04:07 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:51:22 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <stdbool.h>
 
 /*****MACROS****/
-# define CELL 16
+# define CELL 32
 # define FOV 60
 # define POV 270
-# define S_HEI 768
-# define S_WID 1536
+# define S_HEI 720 //768
+# define S_WID 1080  //1536
 # define NUM_RAYS S_WID
 /*****keyword****/
 # define VERTICAL true
