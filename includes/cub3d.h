@@ -74,6 +74,7 @@ typedef struct s_init
 	double	pa;
 	int		mh;
 	int		mw;
+	int		mouse_pos;
 	bool	inter;
 	double	inter_x;
 	double	inter_y;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 t_img	*get_texture(t_init *init, double r_ang)
 {
@@ -99,6 +99,7 @@ void	draw_walls(t_init *init, double distance, int x, int r_ang)
 		my_mlx_pixel_put(init->img, x, y++, 0x62B3FF);
 }
 
+void	draw_map_minmap(t_init *init);
 void	draw_player(t_init *init)
 {
 	int x=0;
@@ -118,11 +119,15 @@ void	draw_player(t_init *init)
 		rp1 += rot_a;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	draw_map(init);
+	//draw_map(init);
+	draw_map_minmap(init);
+	/**
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
 	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
 	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
+	**/
+
 }
 
 void	draw_map(t_init *init)
@@ -179,9 +184,36 @@ char **get_map(void)
 	return (ft_split(map, '\n'));
 }
 
+int	mouse_process(t_init *init)
+{
+	int mouse_x;
+	int mouse_y;
+	double sa;
+
+	sa = get_rad(10);
+	mlx_mouse_get_pos(init->mlx, init->win, &mouse_x, &mouse_y);
+	if (init->mouse_pos != mouse_x)
+	{
+		if (init->mouse_pos > mouse_x)
+		{
+			if (init->pa - sa > 2*M_PI)
+				init->pa -= 2*M_PI;
+			init->pa -= sa;
+		}
+		else
+		{
+			if (init->pa+sa < 0)
+				init->pa += 2*M_PI;
+			init->pa += sa;
+
+		}
+		init->mouse_pos = mouse_x;
+		move_player(init);
+	}
+}
+
 int main(int ac, char **av)
 {
-	/*
 	t_init	*init = malloc(sizeof(t_init));
 	init->img = malloc(sizeof(t_img));
 	init->keys = malloc(sizeof(t_keys));
@@ -190,7 +222,8 @@ int main(int ac, char **av)
 	init->mh = 15, init->mw =strlen(init->map[0]);
 	init->px = 1*CELL + CELL/2, init->py =1*CELL + CELL/2 ;
 	init->pa = get_rad(-90);
-	
+
+
 	init->mlx = mlx_init();
 	init->win = mlx_new_window(init->mlx, S_WID, S_HEI, "Cub3d");
 	init->img->img = mlx_new_image(init->mlx, S_WID, S_HEI);
@@ -217,9 +250,16 @@ int main(int ac, char **av)
 	init->West->addr = mlx_get_data_addr(init->West->img, &init->West->bits_per_pixel, &init->West->line_length, &init->West->endian);
 	
 	draw_player(init);
+
+	/** initial mouse position **/
+	int mouse_y;
+	mlx_mouse_get_pos(init->mlx, init->win, &init->mouse_pos, &mouse_y);
+	/*******************************/
+
 	ft_hook(init);
+	mlx_loop_hook(init->mlx, mouse_process, init);
 	mlx_loop(init->mlx);
-/*=============================================================================================*/
+/*=============================================================================================
 	t_data	data;
 	 if (init_pars(ac, av, &data) == ERROR)
 	{	
@@ -244,6 +284,6 @@ int main(int ac, char **av)
 		printf("%s\n", data.mp[i]);
 	}
 	clean_parsing_data(&data);
-	printf("\033[1;33m --> VALID\n");
+*/	printf("\033[1;33m --> VALID\n");
 	return (0);
 }

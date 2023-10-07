@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	check_map_edge(t_data *data, int y)
 {
@@ -132,6 +132,33 @@ int	check_space_comp(t_data *data)
 	return (VALID);
 }
 
+void map_padding(t_data *data)
+{
+	int y;
+	int x;
+	char *new;
+
+	y = 0;
+	while (data->mp[y])
+	{
+		if (ft_strlen(data->mp[y]) < data->map_w)
+		{
+			new = malloc(sizeof(char) * (data->map_w + 1));
+			ft_strlcpy(new, data->mp[y], data->map_w + 1);
+			x = ft_strlen(data->mp[y]);
+			while (x < data->map_w)
+			{
+				new[x] = ' ';
+				x++;
+			}
+			new[x] = '\0';
+			free(data->mp[y]);
+			data->mp[y] = new;
+		}
+		y++;
+	}
+}
+
 int	check_map(t_data *data, int len, int j)
 {
 	t_map	*tmp;
@@ -162,5 +189,6 @@ int	check_map(t_data *data, int len, int j)
 		data->mp[j] = NULL;
 	}
 	trim_spaces(data);
+	map_padding(data);
 	return (check_space_comp(data));
 }
