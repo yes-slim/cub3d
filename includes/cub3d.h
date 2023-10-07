@@ -75,15 +75,16 @@ typedef struct s_init
 	double	pa;
 	int		mh;
 	int		mw;
-	bool	inter;
+  bool	inter;
 	double	inter_x;
 	double	inter_y;
 	double	inter_xH;
 	double	inter_yH;
 	double	inter_xV;
 	double	inter_yV;
+  int		mouse_pos;
 	t_img	*img;
-	t_img	*South;
+  t_img	*South;
 	t_img	*North;
 	t_img	*East;
 	t_img	*West;

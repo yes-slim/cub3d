@@ -87,6 +87,6 @@ double	dda(t_init *init, double ra)
 		init->inter = HORIZONTAL;	
 	}
 	dis *= cos(init->pa - ra);
-    w_hei = (S_HEI * CELL) / dis;
+  w_hei = (S_HEI * CELL) / dis;
 	return (w_hei);
 }

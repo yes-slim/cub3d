@@ -23,7 +23,7 @@ MLX_SRCS	= $(addsuffix .c, $(addprefix mlx_h/, $(MLX_F)))
 #=================parsing_files=======================================#
 PARS 		= check_errors str_utils get_next_line parsing\
 	 		  ft_atoi linked_list initial_parse check_errors_utils\
-			  parsing_utils str_utils_1 parsing_utils_1 
+			  parsing_utils str_utils_1 parsing_utils_1 minimap 
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
 RC			= dda helpers_1 keys_ev draw_walls textures
