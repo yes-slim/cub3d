@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 23:43:33 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 02:06:29 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_img	*get_texture(t_init *init, double r_ang)
 	{
 		if (cos(r_ang) > 0)
 			return (init->East);
-		
+		else
 			return (init->West);
 	}
-	if (init->inter == HORIZONTAL)
+	else if (init->inter == HORIZONTAL)
 	{
-		if (sin(r_ang) < 0)
+		if (sin(r_ang) > 0)
 			return (init->North);
 		else
 			return (init->South);
@@ -89,7 +89,7 @@ void	draw_walls(t_init *init, double distance, int x, int r_ang)
 	if (w_end > S_HEI)
 		w_end = S_HEI;
 	while (y>=0 && y < w_start)
-		my_mlx_pixel_put(init->img, x, y++, 0xFFBC62);
+		my_mlx_pixel_put(init->img, x, y++, init->F_clr);
 	while (y >= w_start && y < w_end)
 	{
 		t_img *current_tex = get_texture(init, r_ang);
@@ -99,7 +99,7 @@ void	draw_walls(t_init *init, double distance, int x, int r_ang)
 		my_mlx_pixel_put(init->img, x, y++, color);
 	}
 	while (y>=w_end && y <= S_HEI)
-		my_mlx_pixel_put(init->img, x, y++, 0x62B3FF);
+		my_mlx_pixel_put(init->img, x, y++, init->C_clr);
 }
 
 void	draw_player(t_init *init)
@@ -193,7 +193,7 @@ int main(int ac, char **av)
 	printf("EA: %s\n", data.textures[EA]);
 	printf("<------------ map : ----------->\n");
 	for (int i = 0; data.mp[i]; i++)
-		dprintf(open("file", O_CREAT | O_APPEND | O_RDWR, 0777), "%s\n", data.mp[i]);
+		printf("%s\n", data.mp[i]);
 	ft_init(&init, &data);
 	draw_player(&init);
 	ft_hook(&init);

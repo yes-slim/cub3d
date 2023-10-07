@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 23:01:27 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 23:36:08 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 01:48:32 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ft_init(t_init *raycast, t_data *parse)
 	raycast->South = malloc(sizeof(t_img));
 	raycast->East = malloc(sizeof(t_img));
 	raycast->West = malloc(sizeof(t_img));
+	raycast->C_clr = parse->C;
+	raycast->F_clr = parse->F;
 	raycast->map = parse->mp;
 	raycast->mh = parse->map_h;
 	raycast->mw = parse->map_w;
