@@ -99,6 +99,7 @@ void	draw_walls(t_init *init, double distance, int x, int r_ang)
 		my_mlx_pixel_put(init->img, x, y++, 0x62B3FF);
 }
 
+void	draw_map_minmap(t_init *init);
 void	draw_player(t_init *init)
 {
 	int x=0;
@@ -118,11 +119,15 @@ void	draw_player(t_init *init)
 		rp1 += rot_a;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	draw_map(init);
+	//draw_map(init);
+	draw_map_minmap(init);
+	/**
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py, 0xFF0000);
 	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py, 0xFF0000);
 	mlx_pixel_put(init->mlx, init->win, init->px, init->py+1, 0xFF0000);
 	mlx_pixel_put(init->mlx, init->win, init->px+1, init->py+1, 0xFF0000);
+	**/
+
 }
 
 void	draw_map(t_init *init)
