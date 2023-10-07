@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 01:04:07 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:50:45 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@
 # include <stdbool.h>
 
 /*****MACROS****/
-# define CELL 16
+# define CELL 64
 # define FOV 60
-# define POV 270
-# define S_HEI 768
-# define S_WID 1536
+# define S_HEI 720
+# define S_WID 1000
 # define NUM_RAYS S_WID
 /*****keyword****/
 # define VERTICAL true
@@ -69,18 +68,23 @@ typedef struct s_init
 	void	*mlx;
 	void	*win;
 	char	**map;
+	int		F_clr;
+	int		C_clr;
 	double	px;
 	double	py;
 	double	pa;
 	int		mh;
 	int		mw;
-	int		mouse_pos;
-	bool	inter;
+  bool	inter;
 	double	inter_x;
 	double	inter_y;
+	double	inter_xH;
+	double	inter_yH;
+	double	inter_xV;
+	double	inter_yV;
+  int		mouse_pos;
 	t_img	*img;
-	t_img	*brick;
-	t_img	*South;
+  t_img	*South;
 	t_img	*North;
 	t_img	*East;
 	t_img	*West;
@@ -91,7 +95,12 @@ typedef struct s_init
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		get_pixel_color(t_img *img, int x, int y);
 /****helpers****/
+void	ft_init(t_init *raycast, t_data *parse);
+void	draw_walls(t_init *init, double distance, int x, int r_ang);
 double	dda(t_init *init, double ra);
+t_img	*get_texture(t_init *init, double r_ang);
+int		get_texture_x(t_init *init, t_img *text);
+int		get_texture_y(t_init *init, t_img *text, double distance, int y);
 int 	key_pressed(int keycode, t_init *init);
 int		key_release(int keycode, t_init *init);
 int		move_player(t_init *init);
@@ -99,8 +108,5 @@ void	draw_map(t_init *init);
 void	draw_player(t_init *init);
 int		ft_exit(t_init *init);
 double	get_rad(double angel);
-/****libft****/
-char	*_strjoin(char const *s1, char const *s2);
-char	**ft_split(char const *s, char c);
 
 #endif

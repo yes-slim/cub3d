@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/04 20:05:22 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/07 03:00:56 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ PARS 		= check_errors str_utils get_next_line parsing\
 			  parsing_utils str_utils_1 parsing_utils_1 minimap 
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
-RC			= dda helpers_1 mouse_ev keys_ev ft_split
+RC			= dda helpers_1 keys_ev draw_walls textures
 RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC)))
 #==================Scrs===============================================#
-SRCS		= $(RC_SRCS) $(Pars_SRCS) $(MLX_SRCS)
+SRCS		= init.c $(RC_SRCS) $(Pars_SRCS) $(MLX_SRCS)
 #====================================================================#
 OBJ     	= $(SRCS:.c=.o)
 #=========================compile=============================#
