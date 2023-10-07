@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:24:20 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 02:38:05 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 03:53:33 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_img	*get_texture(t_init *init, double r_ang)
 	}
 	else if (init->inter == HORIZONTAL)
 	{
-		if (sin(r_ang) > 0)
+		if (sin(r_ang) < 0)
 			return (init->North);
 		else
 			return (init->South);
