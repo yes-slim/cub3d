@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 15:50:45 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 22:26:45 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void	draw_map(t_init *init);
 void	draw_player(t_init *init);
 int		ft_exit(t_init *init);
 double	get_rad(double angel);
+void	draw_map_minmap(t_init *init);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 02:56:09 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 22:29:15 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_hook(t_init *init)
 }
 
 int main(int ac, char **av)
+{
 	t_data	data;
 	t_init	init;
 	
@@ -59,6 +60,6 @@ int main(int ac, char **av)
 	ft_hook(&init);
 	mlx_loop(init.mlx);
 	clean_parsing_data(&data);
-  printf("\033[1;33m --> VALID\n");
+  	printf("\033[1;33m --> VALID\n");
 	return (0);
 }

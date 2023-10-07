@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 17:23:36 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 22:30:15 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	draw_walls(t_init *init, double distance, int x, int r_ang)
 		my_mlx_pixel_put(init->img, x, y++, init->F_clr);
 	while (y >= w_start && y < w_end)
 	{
-		(void)r_ang;
-		// t_img *current_tex = get_texture(init, r_ang);
-		// int x_t = get_texture_x(init, current_tex);
-		// int y_t = get_texture_y(init, current_tex, distance, y);
-		// int color = get_pixel_color(current_tex, x_t, y_t);
-		my_mlx_pixel_put(init->img, x, y++, 0xFFFFFF);
+		// (void)r_ang;
+		t_img *current_tex = get_texture(init, r_ang);
+		int x_t = get_texture_x(init, current_tex);
+		int y_t = get_texture_y(init, current_tex, distance, y);
+		int color = get_pixel_color(current_tex, x_t, y_t);
+		my_mlx_pixel_put(init->img, x, y++, color);
 	}
 	while (y>=w_end && y <= S_HEI)
 		my_mlx_pixel_put(init->img, x, y++, init->C_clr);
@@ -50,11 +50,12 @@ void	draw_player(t_init *init)
 		ray_nb++;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	// draw_map(init);
-	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16, 0xFF0000);
-	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
-	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
-	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
+	// draw_map_minmap(init);
+	draw_map(init);
+	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
+	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
 }
 
 void	draw_map(t_init *init)
