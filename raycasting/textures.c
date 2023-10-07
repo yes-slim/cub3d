@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:24:20 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 03:53:33 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:54:39 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 t_img	*get_texture(t_init *init, double r_ang)
 {
-	if (init->inter == VERTICAL)
+	if (init->inter == HORIZONTAL)
 	{
-		if (cos(r_ang) > 0)
+		if (r_ang > get_rad(0) && r_ang < get_rad(180))
+			return (init->South);
+		else
+			return (init->North);
+	}
+	else if (init->inter == VERTICAL)
+	{
+		if (r_ang < get_rad(90) && r_ang > get_rad(270))
 			return (init->East);
 		else
 			return (init->West);
-	}
-	else if (init->inter == HORIZONTAL)
-	{
-		if (sin(r_ang) < 0)
-			return (init->North);
-		else
-			return (init->South);
 	}
 	return (NULL);
 }
@@ -35,11 +35,12 @@ int	get_texture_x(t_init *init, t_img *text)
 {
 	int x=0;
 	
-	if (init->inter == VERTICAL)
-		x = init->inter_y;
 	if (init->inter == HORIZONTAL)
 		x = init->inter_x;
+	if (init->inter == VERTICAL)
+		x = init->inter_y;
 	x %= CELL;
+	if (!text)
 	x = x * text->img_w / CELL;
 	return (x);
 }

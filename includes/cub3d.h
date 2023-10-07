@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 03:13:32 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:50:45 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 /*****MACROS****/
 # define CELL 64
 # define FOV 60
-# define S_HEI 768
-# define S_WID 1536
+# define S_HEI 720
+# define S_WID 1000
 # define NUM_RAYS S_WID
 /*****keyword****/
 # define VERTICAL true

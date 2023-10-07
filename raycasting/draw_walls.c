@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 02:26:46 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:23:36 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,35 @@ void	draw_walls(t_init *init, double distance, int x, int r_ang)
 		my_mlx_pixel_put(init->img, x, y++, init->F_clr);
 	while (y >= w_start && y < w_end)
 	{
-		t_img *current_tex = get_texture(init, r_ang);
-		int x_t = get_texture_x(init, current_tex);
-		int y_t = get_texture_y(init, current_tex, distance, y);
-		int color = get_pixel_color(current_tex, x_t, y_t);
-		my_mlx_pixel_put(init->img, x, y++, color);
+		(void)r_ang;
+		// t_img *current_tex = get_texture(init, r_ang);
+		// int x_t = get_texture_x(init, current_tex);
+		// int y_t = get_texture_y(init, current_tex, distance, y);
+		// int color = get_pixel_color(current_tex, x_t, y_t);
+		my_mlx_pixel_put(init->img, x, y++, 0xFFFFFF);
 	}
 	while (y>=w_end && y <= S_HEI)
 		my_mlx_pixel_put(init->img, x, y++, init->C_clr);
 }
 void	draw_player(t_init *init)
 {
-	int x=0;
+	int x=0, ray_nb=0;
 	double rot_a = get_rad((double)FOV / (double)(NUM_RAYS));
 	double distance;
-	double rp1=init->pa+rot_a - get_rad(FOV/2), rp2=init->pa + get_rad(FOV/2);
-	while (rp1 <= rp2)
+	double rp1=init->pa+rot_a - get_rad(FOV/2);
+	while (ray_nb < NUM_RAYS)
 	{
-		if (init->pa > 2 * M_PI)
-			init->pa -= 2 * M_PI;
-		if (init->pa < 0)
-			init->pa += 2 * M_PI;
 		distance = dda(init, rp1);
-		draw_walls(init, distance, x, rp1);
-		x++;
+		draw_walls(init, distance, x++, rp1);
 		rp1 += rot_a;
+		ray_nb++;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	draw_map(init);
-	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16, 0xFF0000);
-	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
-	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
-	mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
+	// draw_map(init);
+	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16, 0xFF0000);
+	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
+	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
+	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
 }
 
 void	draw_map(t_init *init)
