@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:18:19 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 00:32:39 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 02:36:12 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ double	dda_v(t_init *init, double ra)
 		ver_y = tan(ra)*(ver_x - init->px) + init->py;
 	}
 	dis_v = sqrt((ver_x-init->px)*(ver_x-init->px) + (ver_y-init->py)*(ver_y-init->py));
-	init->inter_x = ver_x;
-	init->inter_y = ver_y;
+	init->inter_xV = ver_x;
+	init->inter_yV = ver_y;
 	return (dis_v);
 }
 
@@ -58,8 +58,8 @@ double	dda_h(t_init *init, double ra)
 		
 	}
 	dis_h = sqrt((hor_x-init->px)*(hor_x-init->px) + (hor_y-init->py)*(hor_y-init->py));
-	init->inter_x = hor_x;
-	init->inter_y = hor_y;
+	init->inter_xH = hor_x;
+	init->inter_yH = hor_y;
 	return (dis_h);
 }
 
@@ -74,12 +74,16 @@ double	dda(t_init *init, double ra)
 	dis_h = dda_h(init, ra);
 	if (dis_h > dis_v)
 	{
-		dis = dda_v(init, ra);
+		dis = dis_v;
+		init->inter_x = init->inter_xV;
+		init->inter_y = init->inter_yV;
 		init->inter	= VERTICAL;
 	}
 	else
 	{
-		dis = dda_h(init, ra);
+		dis = dis_h;
+		init->inter_x = init->inter_xH;
+		init->inter_y = init->inter_yH;
 		init->inter = HORIZONTAL;	
 	}
 	dis *= cos(init->pa - ra);

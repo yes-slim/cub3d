@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 23:17:09 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/07 02:39:29 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ typedef struct s_init
 	bool	inter;
 	double	inter_x;
 	double	inter_y;
+	double	inter_xH;
+	double	inter_yH;
+	double	inter_xV;
+	double	inter_yV;
 	t_img	*img;
-	t_img	*brick;
 	t_img	*South;
 	t_img	*North;
 	t_img	*East;
@@ -93,7 +96,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		get_pixel_color(t_img *img, int x, int y);
 /****helpers****/
 void	ft_init(t_init *raycast, t_data *parse);
+void	draw_walls(t_init *init, double distance, int x, int r_ang);
 double	dda(t_init *init, double ra);
+t_img	*get_texture(t_init *init, double r_ang);
+int		get_texture_x(t_init *init, t_img *text);
+int		get_texture_y(t_init *init, t_img *text, double distance, int y);
 int 	key_pressed(int keycode, t_init *init);
 int		key_release(int keycode, t_init *init);
 int		move_player(t_init *init);
