@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/08 23:36:41 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/08 23:41:15 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ clean  :
 
 fclean : clean
 		 @echo $(grey)$(italic)$(bold)":::Deleting executeable:::"$(reset)
-		 @$(DEL) $(NAME)
+		 @$(DEL) $(NAME) $(NAME_bonus)
 		 @echo $(red)$(bold)":::All deleted:::"$(reset)
 
 re 	  : fclean all
