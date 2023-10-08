@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 23:03:08 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:38:48 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_init
 	double	pa;
 	int		mh;
 	int		mw;
+	int		bonus;
 	bool	inter;
 	double	inter_x;
 	double	inter_y;

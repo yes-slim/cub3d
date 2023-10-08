@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 01:28:01 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 22:54:52 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:37:29 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,10 @@ void	move(t_init *init, double *p_cos, double *p_sin)
 
 int	move_player(t_init *init)
 {
-	double	oldy;
 	double	p_sin;
 	double	p_cos;
 	int		spd;
 
-	oldy = init->py;
 	p_cos = 0;
 	p_sin = 0;
 	spd = 4;
@@ -112,7 +110,7 @@ int	move_player(t_init *init)
 	if (init->map[(int)(init->py - get_mv_ud(p_sin) + p_sin)
 		/ CELL][(int)(init->px / CELL)] != '1')
 		init->py -= p_sin * spd;
-	if (init->map[(int)(oldy) / CELL]
+	if (init->map[(int)(init->py) / CELL]
 		[(int)((init->px + get_mv_rl(p_cos) + p_cos) / CELL)] != '1')
 		init->px += p_cos * spd;
 	move_angel(init);

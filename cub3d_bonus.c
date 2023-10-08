@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 23:38:57 by yes-slim         ###   ########.fr       */
+/*   Created: 2023/10/08 23:32:29 by yes-slim          #+#    #+#             */
+/*   Updated: 2023/10/08 23:39:08 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_hook(t_init *init)
 {
 	mlx_hook(init->win, 2, 1L<<0, key_pressed, init);
 	mlx_hook(init->win, 3, 1L<<1, key_release, init);
+	mlx_loop_hook(init->mlx, mouse_process, init);
 	mlx_hook(init->win, 17, 0, ft_exit, init);
 }
 
@@ -23,6 +24,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	t_init	init;
+	int		mouse_y;
 
 	if (init_pars(ac, av, &data) == ERROR)
 	{	
@@ -30,7 +32,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_init(&init, &data);
-	init.bonus = 0;
+	init.bonus = 1;
+	mlx_mouse_get_pos(init.mlx, init.win, &init.mouse_pos, &mouse_y);
 	draw_player(&init);
 	ft_hook(&init);
 	mlx_loop(init.mlx);

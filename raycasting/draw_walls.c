@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 22:43:49 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:39:18 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,20 @@ void	draw_player(t_init *init)
 		ray_nb++;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
-	draw_map_minmap(init);
+	if (init->bonus)
+		draw_map_minmap(init);
 }
 
-// draw_map(init);
-// mlx_pixel_put(init->mlx, init->win,
-// init->px/CELL*16, init->py/CELL*16, 0xFF0000);
-// mlx_pixel_put(init->mlx, init->win,
-// init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
-// mlx_pixel_put(init->mlx, init->win,
-// init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
-// mlx_pixel_put(init->mlx, init->win,
-// init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
 
+// 	draw_map(init);
+// 	mlx_pixel_put(init->mlx, init->win,
+// 	init->px/CELL*16, init->py/CELL*16, 0xFF0000);
+// 	mlx_pixel_put(init->mlx, init->win,
+// 	init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
+// 	mlx_pixel_put(init->mlx, init->win,
+// 	init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
+// 	mlx_pixel_put(init->mlx, init->win,
+// 	init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
 // void	draw_map(t_init *init)
 // {
 // 	int x=0, y=0;

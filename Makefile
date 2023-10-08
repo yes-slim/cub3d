@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/08 23:08:11 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/08 23:36:41 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
 SANITIZ		= -fsanitize=address -g3
 CFLAGS 		= -Wall -Wextra -Werror $(SANITIZ) $(HEADER) 
 NAME    	= cub3d
+NAME_bonus  = cub3d_bonus
 DEL     	= rm -rf
 #========================================================#
 MLX_F		= my_mlx_pixel_put get_pixel_color
@@ -43,6 +44,11 @@ $(NAME) : $(OBJ) cub3d.c
 		 @ar -rc cub3d.a $(OBJ)
 		 @cc cub3d.c $(CFLAGS) cub3d.a -o $(NAME) $(MLX)
 		 @echo $(green)$(bold)":::$(NAME) is ready:::"$(reset)
+
+bonus 	: $(OBJ) cub3d_bonus.c
+		 @ar -rc cub3d.a $(OBJ)
+		 @cc cub3d_bonus.c $(CFLAGS) cub3d.a -o $(NAME_bonus) $(MLX)
+		 @echo $(green)$(bold)":::$(NAME_bonus) is ready:::"$(reset)
 
 clean  :
 		 @echo $(grey)$(italic)$(bold)":::Deleting object files:::"$(reset)

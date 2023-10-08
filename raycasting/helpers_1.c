@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 22:54:10 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 22:55:23 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:32:46 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,4 @@ int	ft_exit(t_init *init)
 double get_rad(double angel)
 {
 	return (angel * M_PI / 180);
-}
-
-void	ft_hook(t_init *init)
-{
-	mlx_hook(init->win, 2, 1L<<0, key_pressed, init);
-	mlx_hook(init->win, 3, 1L<<1, key_release, init);
-	mlx_loop_hook(init->mlx, mouse_process, init);
-	mlx_hook(init->win, 17, 0, ft_exit, init);
 }
