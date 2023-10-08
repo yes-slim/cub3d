@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:36:30 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/06 01:50:01 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:15:58 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,35 +46,30 @@ int	check_position(t_data *data, int y, int x)
 	if (!x || !y || x == ft_strlen(data->mp[y]) - 1 \
 		|| y == data->len_map - 1)
 		return (ERROR);
-	/****/
-	if (x + 1 > ft_strlen(data->mp[y]) 
+	if (x + 1 > ft_strlen(data->mp[y])
 		|| !data->mp[y][x + 1] || is_space(data->mp[y][x + 1]))
 		return (ERROR);
-	/****/
 	if (x - 1 < 0 || is_space(data->mp[y][x - 1]))
 		return (ERROR);
-	/****/
-	if (y + 1 >= data->len_map || x > ft_strlen(data->mp[y + 1]) \
+	if (y + 1 >= data->len_map || x > ft_strlen(data->mp[y + 1])
 		|| !data->mp[y + 1][x] || is_space(data->mp[y + 1][x]))
 		return (ERROR);
-	/****/
-	if (x > ft_strlen(data->mp[y - 1]) || !data->mp[y - 1][x] \
+	if (x > ft_strlen(data->mp[y - 1]) || !data->mp[y - 1][x]
 		|| is_space(data->mp[y - 1][x]))
 		return (ERROR);
-/*
-	if (x == 0 || (x - 1 >= 0 && (!data->mp[y][x - 1] \
+	/*if (x == 0 || (x - 1 >= 0 && (!data->mp[y][x - 1]
 		|| is_space(data->mp[y][x - 1]))))
 		return (ERROR);
-	if (y == 0 || (y - 1 >= 0 && (ft_strlen(data->mp[y - 1]) < x || !data->mp[y - 1][x] \
+	if (y == 0 || (y - 1 >= 0 && (ft_strlen(data->mp[y - 1]) < x || !data->mp[y - 1][x]
 		|| is_space(data->mp[y - 1][x]))))
 		return (ERROR);
-	if (x + 1 >= ft_strlen(data->mp[y]) || (!data->mp[y][x + 1] \
+	if (x + 1 >= ft_strlen(data->mp[y]) || (!data->mp[y][x + 1]
 		|| is_space(data->mp[y][x + 1])))
 		return (ERROR);
 	if (y + 1 >= data->len_map || ft_strlen(data->mp[y + 1]) < x
 		|| !data->mp[y + 1][x] || is_space(data->mp[y + 1][x]))
-		return (ERROR);
-	*/return (VALID);
+		return (ERROR);*/
+	return (VALID);
 }
 
 void	direc_angle(t_data *data, char symbol)
@@ -132,11 +127,11 @@ int	check_space_comp(t_data *data)
 	return (VALID);
 }
 
-void map_padding(t_data *data)
+void	map_padding(t_data *data)
 {
-	int y;
-	int x;
-	char *new;
+	char	*new;
+	int		y;
+	int		x;
 
 	y = 0;
 	while (data->mp[y])
