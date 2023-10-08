@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 23:01:27 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 00:06:50 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:25:29 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	check_null(t_init *raycast)
 		printf("\033[1;31m --> ERROR\n");
 		exit (0);
 	}
-	
 }
+
 void	ft_init_textures(t_init *raycast, t_data *parse)
 {
 	raycast->north->img = mlx_xpm_file_to_image(raycast->mlx,

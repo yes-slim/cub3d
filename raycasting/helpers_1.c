@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 22:54:10 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 23:32:46 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:20:48 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_exit(t_init *init)
 	exit(0);
 }
 
-double get_rad(double angel)
+double	get_rad(double angel)
 {
 	return (angel * M_PI / 180);
 }

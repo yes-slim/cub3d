@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 23:39:18 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:20:56 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	draw_player(t_init *init)
 	if (init->bonus)
 		draw_map_minmap(init);
 }
-
 
 // 	draw_map(init);
 // 	mlx_pixel_put(init->mlx, init->win,

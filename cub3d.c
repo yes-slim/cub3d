@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 23:38:57 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:22:57 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_hook(t_init *init)
 {
-	mlx_hook(init->win, 2, 1L<<0, key_pressed, init);
-	mlx_hook(init->win, 3, 1L<<1, key_release, init);
+	mlx_hook(init->win, 2, 1L << 0, key_pressed, init);
+	mlx_hook(init->win, 3, 1L << 1, key_release, init);
 	mlx_hook(init->win, 17, 0, ft_exit, init);
 }
 
