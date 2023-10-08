@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 00:21:02 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/06 01:50:17 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:22:10 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	get_floor_ceiling(t_data *data, char *arg, int flag)
 	if (value == -1)
 		return (-1);
 	if (flag == F)
-		data->F = value;
+		data->f = value;
 	else
-		data->C = value;
+		data->c = value;
 	return (1);
 }
 
@@ -110,9 +110,9 @@ int	check_arg(t_data *data, char *line)
 		return (get_data(data, &line[i + j], WE));
 	if (!ft_strcmp(&line[i], "EA") && !data->textures[EA])
 		return (get_data(data, &line[i + j], EA));
-	if (!ft_strcmp(&line[i], "F") && data->F == -1)
+	if (!ft_strcmp(&line[i], "F") && data->f == -1)
 		return (get_floor_ceiling(data, &line[i + j], F));
-	if (!ft_strcmp(&line[i], "C") && data->C == -1)
+	if (!ft_strcmp(&line[i], "C") && data->c == -1)
 		return (get_floor_ceiling(data, &line[i + j], C));
 	return (-1);
 }

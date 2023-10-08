@@ -6,15 +6,15 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/07 03:00:56 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/08 23:08:11 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 HEADER  	= -Iincludes  -I/usr/include -Imlx_linux -O3
 MLX			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lbsd
-SANITIZ		= -fsanitize=address
-CFLAGS 		= -Wall -Wextra -Werror -g3 $(SANITIZ) $(HEADER) -c 
+SANITIZ		= -fsanitize=address -g3
+CFLAGS 		= -Wall -Wextra -Werror $(SANITIZ) $(HEADER) 
 NAME    	= cub3d
 DEL     	= rm -rf
 #========================================================#
@@ -23,10 +23,10 @@ MLX_SRCS	= $(addsuffix .c, $(addprefix mlx_h/, $(MLX_F)))
 #=================parsing_files=======================================#
 PARS 		= check_errors str_utils get_next_line parsing\
 	 		  ft_atoi linked_list initial_parse check_errors_utils\
-			  parsing_utils str_utils_1 parsing_utils_1 minimap 
+			  parsing_utils str_utils_1 parsing_utils_1 minimap mouse_mv
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
-RC			= dda helpers_1 keys_ev draw_walls textures
+RC			= dda helpers_1 keys_ev draw_walls textures 
 RC_SRCS   	= $(addsuffix .c, $(addprefix raycasting/, $(RC)))
 #==================Scrs===============================================#
 SRCS		= init.c $(RC_SRCS) $(Pars_SRCS) $(MLX_SRCS)
@@ -35,13 +35,13 @@ OBJ     	= $(SRCS:.c=.o)
 #=========================compile=============================#
 %.o     : %.c
 		 @echo $(grey)$(italic)"	~Compiling $<"$(reset)
-		 @cc $(CFLAGS) $< -o $@ 
+		 @cc $(CFLAGS) -c $< -o $@ 
 #==========================rules==============================#
 all     : $(NAME)
 
 $(NAME) : $(OBJ) cub3d.c
 		 @ar -rc cub3d.a $(OBJ)
-		 @cc $(SANITIZ) cub3d.c cub3d.a $(HEADER) -o $(NAME) $(MLX)
+		 @cc cub3d.c $(CFLAGS) cub3d.a -o $(NAME) $(MLX)
 		 @echo $(green)$(bold)":::$(NAME) is ready:::"$(reset)
 
 clean  :

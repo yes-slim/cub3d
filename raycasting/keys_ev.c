@@ -6,111 +6,115 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 01:28:01 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/06 01:42:09 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:54:52 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int key_pressed(int keycode, t_init *init)
+int	get_mv_ud(double p_sin);
+int	get_mv_rl(double p_cos);
+
+int	key_pressed(int keycode, t_init *init)
 {
 	if (keycode == KEY_ESC)
 		ft_exit(init);
-	if (keycode == KEY_W)//w
-		init->keys->m_W = 1; 
-	if (keycode == KEY_S) //s
-		init->keys->m_S = 1; 
-	if (keycode == KEY_D) //d
-		init->keys->m_D = 1;
-	if (keycode == KEY_A) //a
-		init->keys->m_A = 1;
-	if (keycode == KEY_LEFT) // left
-		init->keys->m_L = 1;
-	if (keycode == KEY_RIGHT) // right
-		init->keys->m_R = 1;
+	if (keycode == KEY_W)
+		init->keys->m_w = 1;
+	if (keycode == KEY_S)
+		init->keys->m_s = 1;
+	if (keycode == KEY_D)
+		init->keys->m_d = 1;
+	if (keycode == KEY_A)
+		init->keys->m_a = 1;
+	if (keycode == KEY_LEFT)
+		init->keys->m_l = 1;
+	if (keycode == KEY_RIGHT)
+		init->keys->m_r = 1;
 	move_player(init);
 	return (0);
 }
 
-int key_release(int keycode, t_init *init)
+int	key_release(int keycode, t_init *init)
 {
-	if (keycode == KEY_W)//w
-		init->keys->m_W = 0; 
-	if (keycode == KEY_S) //s
-		init->keys->m_S = 0; 
-	if (keycode == KEY_D) //d
-		init->keys->m_D = 0;
-	if (keycode == KEY_A) //a
-		init->keys->m_A = 0;
-	if (keycode == KEY_LEFT) // left
-		init->keys->m_L = 0;
-	if (keycode == KEY_RIGHT) // right
-		init->keys->m_R = 0;
+	if (keycode == KEY_W)
+		init->keys->m_w = 0;
+	if (keycode == KEY_S)
+		init->keys->m_s = 0;
+	if (keycode == KEY_D)
+		init->keys->m_d = 0;
+	if (keycode == KEY_A)
+		init->keys->m_a = 0;
+	if (keycode == KEY_LEFT)
+		init->keys->m_l = 0;
+	if (keycode == KEY_RIGHT)
+		init->keys->m_r = 0;
 	return (0);
 }
 
 void	move_angel(t_init *init)
 {
-	double sa;
-	
-	sa=get_rad(5);
-	if (init->keys->m_L == 1) // left
+	double	sa;
+
+	sa = get_rad(5);
+	if (init->keys->m_l == 1)
 	{
-		if (init->pa-sa > 2*M_PI)
-			init->pa -= 2*M_PI;
-		init->pa -= sa;
-	}
-	if (init->keys->m_R == 1) // right
-	{
-		if (init->pa+sa < 0)
-			init->pa += 2*M_PI;
+		if (init->pa - sa > 2 * M_PI)
+			init->pa -= 2 * M_PI;
 		init->pa += sa;
 	}
+	if (init->keys->m_r == 1)
+	{
+		if (init->pa + sa < 0)
+			init->pa += 2 * M_PI;
+		init->pa -= sa;
+	}
 }
-void	move(t_init *init, double *p_cos, double *p_sin, int spd)
+
+void	move(t_init *init, double *p_cos, double *p_sin)
 {
-	if (init->keys->m_W == 1)//w
+	if (init->keys->m_w == 1)
 	{
-		*p_cos=cos(init->pa)*spd;
-		*p_sin=sin(init->pa)*spd;
+		*p_cos = cos(init->pa);
+		*p_sin = sin(init->pa);
 	}
-	if (init->keys->m_S == 1) //s
+	if (init->keys->m_s == 1)
 	{
-		*p_cos=cos(init->pa - M_PI)*spd;
-		*p_sin=sin(init->pa - M_PI)*spd;
+		*p_cos = cos(init->pa - M_PI);
+		*p_sin = sin(init->pa - M_PI);
 	}
-	if (init->keys->m_D == 1) //d
+	if (init->keys->m_d == 1)
 	{
-		*p_cos=cos(init->pa + M_PI/2)*spd;
-		*p_sin=sin(init->pa + M_PI/2)*spd;
+		*p_cos = cos(init->pa - M_PI / 2);
+		*p_sin = sin(init->pa - M_PI / 2);
 	}
-	if (init->keys->m_A == 1) //a
+	if (init->keys->m_a == 1)
 	{
-		*p_cos=cos(init->pa - M_PI/2)*spd;
-		*p_sin=sin(init->pa - M_PI/2)*spd;
+		*p_cos = cos(init->pa + M_PI / 2);
+		*p_sin = sin(init->pa + M_PI / 2);
 	}
 }
 
 int	move_player(t_init *init)
 {
-	double	oldx;
+	double	oldy;
 	double	p_sin;
 	double	p_cos;
 	int		spd;
-	
-	oldx = init->px;
+
+	oldy = init->py;
 	p_cos = 0;
 	p_sin = 0;
-	spd = 6;
-	if (init->keys->m_W == 1 || init->keys->m_S == 1 ||
-		init->keys->m_D == 1 || init->keys->m_A == 1)
-		move(init, &p_cos, &p_sin, spd);
-	if (init->map[(int)(init->py + 5 + p_sin) / CELL][(int)(oldx / CELL)] != '1' &&
-		init->map[(int)(init->py - 5 + p_sin) / CELL][(int)(oldx / CELL)] != '1')
-		init->py += p_sin;
-	if (init->map[(int)(init->py) / CELL][(int)((init->px + 5 + p_cos) / CELL)] != '1' &&
-		init->map[(int)(init->py) / CELL][(int)((init->px - 5 + p_cos) / CELL)] != '1')
-		init->px += p_cos;
+	spd = 4;
+	if (init->keys->m_w == 1 || init->keys->m_s == 1
+		|| init->keys->m_d == 1 || init->keys->m_a == 1)
+		move(init, &p_cos, &p_sin);
+	if (init->map[(int)(init->py - get_mv_ud(p_sin) + p_sin)
+		/ CELL][(int)(init->px / CELL)] != '1')
+		init->py -= p_sin * spd;
+	if (init->map[(int)(oldy) / CELL]
+		[(int)((init->px + get_mv_rl(p_cos) + p_cos) / CELL)] != '1')
+		init->px += p_cos * spd;
 	move_angel(init);
 	draw_player(init);
 	return (0);
