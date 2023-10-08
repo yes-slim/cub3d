@@ -4,7 +4,7 @@
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
-!_TAG_PROC_CWD	/nfs/homes/mberrouk/mouse/	//
+!_TAG_PROC_CWD	/nfs/homes/mberrouk/cub3d/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
@@ -22,9 +22,11 @@ dda	raycasting/dda.c	/^double	dda(t_init *init, double ra)$/;"	f	typeref:typenam
 dda_h	raycasting/dda.c	/^double	dda_h(t_init *init, double ra)$/;"	f	typeref:typename:double
 dda_v	raycasting/dda.c	/^double	dda_v(t_init *init, double ra)$/;"	f	typeref:typename:double
 direc_angle	parsing/check_errors.c	/^void	direc_angle(t_data *data, char symbol)$/;"	f	typeref:typename:void
-draw_map	cub3d.c	/^void	draw_map(t_init *init)$/;"	f	typeref:typename:void
-draw_player	cub3d.c	/^void	draw_player(t_init *init)$/;"	f	typeref:typename:void
-draw_walls	cub3d.c	/^void	draw_walls(t_init *init, double distance, int x, int r_ang)$/;"	f	typeref:typename:void
+draw_map	raycasting/draw_walls.c	/^void	draw_map(t_init *init)$/;"	f	typeref:typename:void
+draw_map_minmap	minimap.c	/^void	draw_map_minmap(t_init *init)$/;"	f	typeref:typename:void
+draw_map_minmap	parsing/minimap.c	/^void	draw_map_minmap(t_init *init)$/;"	f	typeref:typename:void
+draw_player	raycasting/draw_walls.c	/^void	draw_player(t_init *init)$/;"	f	typeref:typename:void
+draw_walls	raycasting/draw_walls.c	/^void	draw_walls(t_init *init, double distance, int x, int r_ang)$/;"	f	typeref:typename:void
 fetch_map	parsing/parsing.c	/^void	fetch_map(t_data *data, char *line, int *row_index)$/;"	f	typeref:typename:void
 fillwrd	raycasting/ft_split.c	/^static char	*fillwrd(const char *s, char c, int start)$/;"	f	typeref:typename:char *	file:
 floor_ceiling_value	parsing/parsing_utils.c	/^int	floor_ceiling_value(char *arg, int comma, int conver, int i)$/;"	f	typeref:typename:int
@@ -34,6 +36,8 @@ ft_exit	cub3d.c	/^int	ft_exit(t_init *init)$/;"	f	typeref:typename:int
 ft_fillarr	raycasting/ft_split.c	/^static	char	**ft_fillarr(const char *s, char **arr, int wc, char c)$/;"	f	typeref:typename:char **	file:
 ft_free	raycasting/ft_split.c	/^static void	ft_free(char **arr, int i)$/;"	f	typeref:typename:void	file:
 ft_hook	cub3d.c	/^void	ft_hook(t_init *init)$/;"	f	typeref:typename:void
+ft_init	init.c	/^void	ft_init(t_init *raycast, t_data *parse)$/;"	f	typeref:typename:void
+ft_init_textures	init.c	/^void	ft_init_textures(t_init *raycast, t_data *parse)$/;"	f	typeref:typename:void
 ft_lstadd_back	parsing/linked_list.c	/^void	ft_lstadd_back(t_map **lst, t_map *new)$/;"	f	typeref:typename:void
 ft_lstclear	parsing/linked_list.c	/^void	ft_lstclear(t_map **lst)$/;"	f	typeref:typename:void
 ft_lstlast	parsing/linked_list.c	/^t_map	*ft_lstlast(t_map *lst)$/;"	f	typeref:typename:t_map *
@@ -49,13 +53,12 @@ ft_try2read	parsing/get_next_line.c	/^char	*ft_try2read(int fd, char *line, char
 ft_wrdcount	raycasting/ft_split.c	/^static int	ft_wrdcount(char const *s, char c)$/;"	f	typeref:typename:int	file:
 get_data	parsing/parsing.c	/^int	get_data(t_data *data, char *arg, int flag)$/;"	f	typeref:typename:int
 get_floor_ceiling	parsing/parsing_utils.c	/^int	get_floor_ceiling(t_data *data, char *arg, int flag)$/;"	f	typeref:typename:int
-get_map	cub3d.c	/^char **get_map(void)$/;"	f	typeref:typename:char **
 get_next_line	parsing/get_next_line.c	/^char	*get_next_line(int fd)$/;"	f	typeref:typename:char *
 get_pixel_color	mlx_h/get_pixel_color.c	/^int	get_pixel_color(t_img *img, int x, int y)$/;"	f	typeref:typename:int
 get_rad	cub3d.c	/^double get_rad(double angel)$/;"	f	typeref:typename:double
-get_texture	cub3d.c	/^t_img	*get_texture(t_init *init, double r_ang)$/;"	f	typeref:typename:t_img *
-get_texture_x	cub3d.c	/^int	get_texture_x(t_init *init)$/;"	f	typeref:typename:int
-get_texture_y	cub3d.c	/^int	get_texture_y(t_init *init, double distance, int y)$/;"	f	typeref:typename:int
+get_texture	raycasting/textures.c	/^t_img	*get_texture(t_init *init, double r_ang)$/;"	f	typeref:typename:t_img *
+get_texture_x	raycasting/textures.c	/^int	get_texture_x(t_init *init, t_img *text)$/;"	f	typeref:typename:int
+get_texture_y	raycasting/textures.c	/^int	get_texture_y(t_init *init, t_img *text, double distance, int y)$/;"	f	typeref:typename:int
 init_pars	parsing/initial_parse.c	/^int	init_pars(int ac, char *av[], t_data *data)$/;"	f	typeref:typename:int
 init_parsing_data	parsing/initial_parse.c	/^int	init_parsing_data(t_data *data)$/;"	f	typeref:typename:int
 is_space	parsing/str_utils_1.c	/^int	is_space(char c)$/;"	f	typeref:typename:int
@@ -63,14 +66,15 @@ key_pressed	raycasting/keys_ev.c	/^int key_pressed(int keycode, t_init *init)$/;
 key_release	raycasting/keys_ev.c	/^int key_release(int keycode, t_init *init)$/;"	f	typeref:typename:int
 main	cub3d.c	/^int main(int ac, char **av)$/;"	f	typeref:typename:int
 map_component	parsing/check_errors_utils.c	/^int	map_component(char c)$/;"	f	typeref:typename:int
-mouse_move	cub3d.c	/^int	mouse_move(t_init *init)$/;"	f	typeref:typename:int
-mouse_process	cub3d.c	/^int	mouse_process(t_init *init)$/;"	f	typeref:typename:int
+map_padding	parsing/check_errors.c	/^void map_padding(t_data *data)$/;"	f	typeref:typename:void
 move	raycasting/keys_ev.c	/^void	move(t_init *init, double *p_cos, double *p_sin, int spd)$/;"	f	typeref:typename:void
 move_angel	raycasting/keys_ev.c	/^void	move_angel(t_init *init)$/;"	f	typeref:typename:void
 move_player	raycasting/keys_ev.c	/^int	move_player(t_init *init)$/;"	f	typeref:typename:int
 my_mlx_pixel_put	mlx_h/my_mlx_pixel_put.c	/^void	my_mlx_pixel_put(t_img *img, int x, int y, int color)$/;"	f	typeref:typename:void
+my_mlx_pixel_putmmp	minimap.c	/^void	my_mlx_pixel_putmmp(t_img *img, int x, int y, int color)$/;"	f	typeref:typename:void
 parsing_file	parsing/parsing.c	/^int	parsing_file(int fd, t_data *data, int row, int countarg)$/;"	f	typeref:typename:int
 print_errmsg	parsing/initial_parse.c	/^int	print_errmsg(char *msg)$/;"	f	typeref:typename:int
+put_mmap	parsing/minimap.c	/^void	put_mmap(t_init *init, int x, int y, int size, int tmp_y, int tmp_x)$/;"	f	typeref:typename:void
 trim_spaces	parsing/parsing_utils_1.c	/^void	trim_spaces(t_data *data)$/;"	f	typeref:typename:void
 valid_form	parsing/parsing_utils.c	/^int	valid_form(char *arg, int j, int comma)$/;"	f	typeref:typename:int
 valid_space	parsing/check_errors_utils.c	/^int	valid_space(t_data *data, int x, int y)$/;"	f	typeref:typename:int
