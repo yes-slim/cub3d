@@ -18,6 +18,12 @@ void	put_mmap(t_init *init, int x, int y, int size, int tmp_y, int tmp_x)
 
 }
 
+bool inside_circle(int x, int y, int centerX, int centerY, int radius) {
+    int distance;
+
+	distance = sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+    return distance <= radius;
+}
 void	draw_map_minmap(t_init *init)
 {
 	int x;
@@ -32,14 +38,18 @@ void	draw_map_minmap(t_init *init)
 	mw = 250;
 	size = 12;
 	int tmp_y;
+	
+
+	int centerX = mw / 2;
+    int centerY = mh / 2;
+    int radius = 100;
 
 	tmp_y = 0;
 	y = ((init->py / CELL) * size) - mh / 2;
 	//if (y <= 0)
 	//	y = 0;
 	tmp_x = 0;
-//	img.img = mlx_new_image(init->mlx, 256, 125);
-//	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+    
 	while (tmp_y < mh && y / size < init->mh)
 	{
 		x = ((init->px / CELL) * size) - mw / 2;
@@ -48,7 +58,8 @@ void	draw_map_minmap(t_init *init)
 		tmp_x = 0;
 		while (tmp_x <= mw && x / size < init->mw)
  		{
-			put_mmap(init, x, y, size, tmp_y, tmp_x);
+			if (inside_circle(tmp_x, tmp_y, centerX, centerY, radius))
+				put_mmap(init, x, y, size, tmp_y, tmp_x);
 			x++;
 			tmp_x++;
 		}
@@ -56,7 +67,33 @@ void	draw_map_minmap(t_init *init)
 		tmp_y++;
 	}
 
-	int py = (mh / 2); //((init->py / CELL) * size) + mh;
+	/****    draw_map_minmap Borther ****/
+	int circangle;
+
+	circangle = 0;
+	while (radius < 102)
+	{
+		circangle = 0;
+		while (circangle < 360)
+		{
+			int x = centerX + radius * cos(circangle * M_PI / 180);
+			int y = centerY + radius * sin(circangle * M_PI / 180);
+       		
+			mlx_pixel_put(init->mlx, init->win, x, y, 0x0000);
+			mlx_pixel_put(init->mlx, init->win, x + 1, y, 0x0000);
+			mlx_pixel_put(init->mlx, init->win, x - 1, y, 0x0000);
+			mlx_pixel_put(init->mlx, init->win, x, y - 1, 0x0000);
+			mlx_pixel_put(init->mlx, init->win, x, y + 1, 0x0000);
+			mlx_pixel_put(init->mlx, init->win, x + 1, y + 1, 0x0000); 
+			mlx_pixel_put(init->mlx, init->win, x - 1, y - 1, 0x0000); 
+			circangle++;
+		}
+		radius++;
+    }
+
+
+	/**** draw_map_minmap Player ****/
+	int py = (mh / 2);
 	int px = (mw / 2);
 	
 	int yy;

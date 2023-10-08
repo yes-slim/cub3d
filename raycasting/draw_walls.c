@@ -36,6 +36,8 @@ void	draw_walls(t_init *init, double distance, int x, double r_ang)
 	while (y>=w_end && y <= S_HEI)
 		my_mlx_pixel_put(init->img, x, y++, init->C_clr);
 }
+
+void	draw_map_minmap(t_init *init);
 void	draw_player(t_init *init)
 {
 	int x=0, ray_nb=0;
@@ -50,6 +52,7 @@ void	draw_player(t_init *init)
 		ray_nb++;
 	}
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
+	draw_map_minmap(init);
 	// draw_map(init);
 	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16, init->py/CELL*16, 0xFF0000);
 	// mlx_pixel_put(init->mlx, init->win, init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
