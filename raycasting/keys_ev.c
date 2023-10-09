@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 01:28:01 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 14:54:23 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:43:22 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	move_angel(t_init *init)
 {
 	double	sa;
 
-	sa = get_rad(5);
+	sa = get_rad(10);
 	if (init->keys->m_l == 1)
 	{
 		if (init->pa - sa > 2 * M_PI)
@@ -103,7 +103,7 @@ int	move_player(t_init *init)
 
 	p_cos = 0;
 	p_sin = 0;
-	spd = 6;
+	spd = 15;
 	if (init->keys->m_w == 1 || init->keys->m_s == 1
 		|| init->keys->m_d == 1 || init->keys->m_a == 1)
 		move(init, &p_cos, &p_sin);

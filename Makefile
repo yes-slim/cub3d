@@ -6,14 +6,14 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/09 14:52:16 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/09 20:35:12 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 HEADER  	= -Iincludes
 MLX			= -lmlx -framework OpenGL -framework AppKit
-SANITIZ		= -fsanitize=address -g3
+SANITIZ		= #-fsanitize=address -g3
 CFLAGS 		= -Wall -Wextra -Werror $(SANITIZ) $(HEADER) 
 NAME    	= cub3d
 NAME_bonus  = cub3d_bonus
@@ -25,7 +25,7 @@ MLX_SRCS	= $(addsuffix .c, $(addprefix mlx_h/, $(MLX_F)))
 PARS 		= check_errors str_utils get_next_line parsing\
 	 		  ft_atoi linked_list initial_parse check_errors_utils\
 			  parsing_utils str_utils_1 parsing_utils_1 minimap\
-			  check_errors_1 
+			  check_errors_1 mouse_mv
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
 RC			= dda helpers_1 keys_ev draw_walls textures 

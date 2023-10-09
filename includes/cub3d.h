@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 14:24:00 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:56:16 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 /*****MACROS****/
 # define CELL 128
 # define FOV 60
-# define S_HEI 768
-# define S_WID 1024
+# define S_HEI 800
+# define S_WID 1366
 # define NUM_RAYS S_WID
 /*****keyword****/
 # define VERTICAL 0
@@ -119,7 +119,7 @@ void	ft_hook(t_init *init);
 int		move_player(t_init *init);
 int		key_pressed(int keycode, t_init *init);
 int		key_release(int keycode, t_init *init);
-int		mouse_process(t_init *init);
+int		mouse_process(int mouse_x, int mouse_y, t_init *init);
 int		ft_exit(t_init *init);
 
 #endif

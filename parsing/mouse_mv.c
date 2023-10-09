@@ -6,20 +6,19 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:09:31 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 12:33:18 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:43:46 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	mouse_process(t_init *init)
+int	mouse_process(int mouse_x, int mouse_y, t_init *init)
 {
-	int		mouse_x;
-	int		mouse_y;
 	double	sa;
 
-	sa = get_rad(3);
-	mlx_mouse_get_pos(init->mlx, init->win, &mouse_x, &mouse_y);
+	sa = get_rad(6);
+	if (mouse_x < 0 || mouse_x > S_WID || mouse_y < 0 || mouse_y > S_HEI)
+		return (0);
 	if (init->mouse_pos != mouse_x)
 	{
 		if (init->mouse_pos > mouse_x)
