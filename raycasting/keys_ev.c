@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 01:28:01 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/08 23:37:29 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:59:45 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	move_player(t_init *init)
 
 	p_cos = 0;
 	p_sin = 0;
-	spd = 4;
+	spd = 6;
 	if (init->keys->m_w == 1 || init->keys->m_s == 1
 		|| init->keys->m_d == 1 || init->keys->m_a == 1)
 		move(init, &p_cos, &p_sin);

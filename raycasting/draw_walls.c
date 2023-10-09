@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 00:20:56 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:40:36 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	draw_walls(t_init *init, double distance, int x, double r_ang)
 		color = get_text_info(init, r_ang, y, distance);
 		my_mlx_pixel_put(init->img, x, y++, color);
 	}
-	while (y >= w_end && y <= S_HEI)
+	while (y >= w_end && y < S_HEI)
 		my_mlx_pixel_put(init->img, x, y++, init->c_clr);
 }
 

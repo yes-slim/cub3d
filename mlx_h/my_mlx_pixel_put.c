@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 01:05:07 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 00:24:58 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:04:21 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,4 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 		return ;
 	*(unsigned int *)dst = color;
 }
+

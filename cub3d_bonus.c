@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 23:32:29 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 00:23:11 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:06:35 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	t_init	init;
-	int		mouse_y;
+	// int		mouse_y;
 
 	if (init_pars(ac, av, &data) == ERROR)
 	{	
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 	}
 	ft_init(&init, &data);
 	init.bonus = 1;
-	mlx_mouse_get_pos(init.mlx, init.win, &init.mouse_pos, &mouse_y);
+	mlx_mouse_get_pos(init.win, &init.mouse_pos, &mouse_y);
 	draw_player(&init);
 	ft_hook(&init);
 	mlx_loop(init.mlx);
