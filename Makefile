@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/09 14:06:44 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/09 14:22:03 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MLX_SRCS	= $(addsuffix .c, $(addprefix mlx_h/, $(MLX_F)))
 PARS 		= check_errors str_utils get_next_line parsing\
 	 		  ft_atoi linked_list initial_parse check_errors_utils\
 			  parsing_utils str_utils_1 parsing_utils_1 minimap\
-			  check_errors_1 mouse_mv
+			  check_errors_1 
 Pars_SRCS   = $(addsuffix .c, $(addprefix parsing/, $(PARS))) 
 #=================execution_files=======================================#
 RC			= dda helpers_1 keys_ev draw_walls textures 

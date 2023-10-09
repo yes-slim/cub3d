@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 13:44:37 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:24:00 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <stdbool.h>
 
 /*****MACROS****/
-# define CELL 64
+# define CELL 128
 # define FOV 60
 # define S_HEI 768
 # define S_WID 1024

@@ -1,7 +1,7 @@
-NO ./textures_copy/test/north.xpm
-SO ./textures_copy/test/south.xpm
-WE ./textures_copy/test/west.xpm
-EA ./textures_copy/test/east.xpm
+NO ./textures/W_5.xpm
+SO ./textures/W_6.xpm
+WE ./textures/W_7.xpm
+EA ./textures/W_8.xpm
 
 F 255, 188, 98
 C 98, 179, 255
