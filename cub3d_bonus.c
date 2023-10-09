@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 23:32:29 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 14:06:35 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:54:59 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	t_init	init;
-	// int		mouse_y;
+	int		mouse_y;
 
 	if (init_pars(ac, av, &data) == ERROR)
 	{	
