@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 23:01:27 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 21:36:51 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 23:41:58 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_init_textures(t_init *raycast, t_data *parse)
 
 void	ft_init(t_init *raycast, t_data *parse)
 {
-	raycast->img = malloc(sizeof(t_img));
 	raycast->img = malloc(sizeof(t_img));
 	raycast->keys = malloc(sizeof(t_keys));
 	raycast->north = malloc(sizeof(t_img));
