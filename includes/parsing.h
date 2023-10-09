@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 20:38:23 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/08 22:21:08 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:47:30 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MINI_W 250
 # define MINI_CEL 12
 # define P_SIZE 6
-# define P_COLOR 0x1CFC03
+# define P_COLOR 0x000000
 # define MINI_RAD 100
 # define M_CEN_X 125
 # define M_CEN_Y 125
