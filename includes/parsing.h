@@ -18,10 +18,20 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
-# define BUFFER_SIZE 1024
 # define ERROR 0
 # define VALID 1
+
+/*** mini map macros ***/
+# define MINI_H 250
+# define MINI_W 250
+# define MINI_CEL 12
+# define P_SIZE 6
+# define P_COLOR 0x1CFC03
+# define MINI_RAD 100
+# define M_CEN_X 125
+# define M_CEN_Y 125
 
 enum e_Textures
 {
@@ -55,9 +65,17 @@ typedef struct s_data
 	t_map	*map;
 }	t_data;
 
+typedef struct s_coordinate
+{
+	int	x;
+	int	y;
+}	t_coordinate;
+
 /****check_errors.c****/
 int		check_extension_file(char *str);
 int		check_map(t_data *data, int len, int j);
+int		convert_listmap(t_data *data, int j);
+void	direc_angle(t_data *data, char symbol);
 
 /****get_next_line.c****/
 char	*get_next_line(int fd);
@@ -98,7 +116,7 @@ int		check_arg(t_data *data, char *line);
 int		get_floor_ceiling(t_data *data, char *arg, int flag);
 int		floor_ceiling_value(char *arg, int comma, int conver, int i);
 int		convert_rgb(char *arg, int conver);
-int		valid_form(char *arg, int j, int comma);
+bool	valid_form(char *arg, int j, int comma);
 
 /****check_errors_utils.c****/
 int		map_component(char c);
@@ -106,5 +124,12 @@ int		valid_space(t_data *data, int x, int y);
 
 /****parsing_utils_1.c****/
 void	trim_spaces(t_data *data);
+bool	inside_circle(int x, int y);
+
+/****check_errors_1.c****/
+int		pars_fc_value(char *arg, int i, int *conver, int *result);
+int		check_space_comp(t_data *data);
+int		set_player_info(t_data *data, t_coordinate p, int *flag);
+int		check_position(t_data *data, int y, int x);
 
 #endif

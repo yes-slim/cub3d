@@ -1,114 +1,124 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mberrouk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/09 00:24:17 by mberrouk          #+#    #+#             */
+/*   Updated: 2023/10/09 00:24:19 by mberrouk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
-#include <mlx.h>
-#include <stdio.h>
 
-void	my_mlx_pixel_putmmp(t_img *img, int x, int y, int color);
-
-void	put_mmap(t_init *init, int x, int y, int size, int tmp_y, int tmp_x)
+void	put_mmap(t_init *init, t_coordinate point, t_coordinate index)
 {
-	if (y < 0 || x < 0 || y / size < 0 || x / size < 0 || y / size >= init->mh
-		|| x / size > init->mw)
-				return ;
-	else if (init->map[y / size][x / size] == '0')
+	if (point.y < 0 || point.x < 0 || point.y / MINI_CEL < 0 \
+		|| point.x / MINI_CEL < 0 || point.y / MINI_CEL >= init->mh \
+		|| point.x / MINI_CEL > init->mw)
+		return ;
+	else if (init->map[point.y / MINI_CEL][point.x / MINI_CEL] == '0')
 	{
-		mlx_pixel_put(init->mlx, init->win, tmp_x, tmp_y, 0x878787);
+		mlx_pixel_put(init->mlx, init->win, index.x, index.y, 0x878787);
 	}
-	else if (init->map[y / size][x /size] == '1')
-		mlx_pixel_put(init->mlx, init->win, tmp_x, tmp_y, 0xC09E06);
-
+	else if (init->map[point.y / MINI_CEL][point.x / MINI_CEL] == '1')
+		mlx_pixel_put(init->mlx, init->win, index.x, index.y, 0xC09E06);
 }
 
-bool inside_circle(int x, int y, int centerX, int centerY, int radius) {
-    int distance;
+void	draw_line(t_init *init, double x0, double y0, t_coordinate p1)
+{
+	int		steps;
+	int		i;
+	double	xindex;
+	double	yindex;
 
-	distance = sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
-    return distance <= radius;
+	if (fabs(p1.x - x0) >= fabs(p1.y - y0))
+		steps = fabs(p1.x - x0);
+	else
+		steps = fabs(p1.y - y0);
+	xindex = (p1.x - x0) / steps;
+	yindex = (p1.y - y0) / steps;
+	i = 0;
+	while (i < steps)
+	{
+		mlx_pixel_put(init->mlx, init->win, round(x0) \
+				, round(y0), P_COLOR);
+		x0 += xindex;
+		y0 += yindex;
+		i++;
+	}
 }
+
+void	draw_mmap_border(t_init *init)
+{
+	int	border;
+	int	segments;
+	int	x;
+	int	y;
+	int	i;
+
+	i = 0;
+	segments = 2000;
+	border = MINI_RAD;
+	while (border < 104)
+	{
+		i = 0;
+		while (i < 2000)
+		{
+			x = M_CEN_X + border * cos(2 * M_PI * i / segments);
+			y = M_CEN_Y + border * sin(2 * M_PI * i / segments);
+			mlx_pixel_put(init->mlx, init->win, x, y, P_COLOR);
+			i++;
+		}
+		border++;
+	}
+}
+
+void	draw_mmap_player(t_init *init)
+{
+	t_coordinate	centrep;
+	t_coordinate	p1;
+	t_coordinate	p2;
+	t_coordinate	p3;
+	double			angle;
+
+	centrep.x = M_CEN_X;
+	centrep.y = M_CEN_Y;
+	angle = init->pa * -1;
+	p1.x = M_CEN_X + P_SIZE * cos(angle);
+	p1.y = M_CEN_Y + P_SIZE * sin(angle);
+	p2.x = M_CEN_X + P_SIZE * cos(angle + (2.0 * M_PI / 3.0));
+	p2.y = M_CEN_Y + P_SIZE * sin(angle + (2.0 * M_PI / 3.0));
+	p3.x = M_CEN_X + P_SIZE * cos(angle + (4.0 * M_PI / 3.0));
+	p3.y = M_CEN_Y + P_SIZE * sin(angle + (4.0 * M_PI / 3.0));
+	draw_line(init, M_CEN_X, M_CEN_Y, p3);
+	draw_line(init, p3.x, p3.y, p1);
+	draw_line(init, p1.x, p1.y, p2);
+	draw_line(init, p2.x, p2.y, centrep);
+	draw_mmap_border(init);
+}
+
 void	draw_map_minmap(t_init *init)
 {
-	int x;
-	int	tmp_x;
-	int y;
-	int size;
-	int mh;
-	int mw;
-	//t_img img;
+	t_coordinate	index;
+	t_coordinate	point;
 
-	mh = 200;
-	mw = 250;
-	size = 12;
-	int tmp_y;
-	
-
-	int centerX = mw / 2;
-    int centerY = mh / 2;
-    int radius = 100;
-
-	tmp_y = 0;
-	y = ((init->py / CELL) * size) - mh / 2;
-	//if (y <= 0)
-	//	y = 0;
-	tmp_x = 0;
-    
-	while (tmp_y < mh && y / size < init->mh)
+	index.y = 0;
+	point.y = ((init->py / CELL) * MINI_CEL) - MINI_H / 2;
+	while (index.y < MINI_H && point.y / MINI_CEL < init->mh)
 	{
-		x = ((init->px / CELL) * size) - mw / 2;
-	//	if (x < 0)
-	//		x = 0;
-		tmp_x = 0;
-		while (tmp_x <= mw && x / size < init->mw)
- 		{
-			if (inside_circle(tmp_x, tmp_y, centerX, centerY, radius))
-				put_mmap(init, x, y, size, tmp_y, tmp_x);
-			x++;
-			tmp_x++;
-		}
-		y++;
-		tmp_y++;
-	}
-
-	/****    draw_map_minmap Borther ****/
-	int circangle;
-
-	circangle = 0;
-	while (radius < 102)
-	{
-		circangle = 0;
-		while (circangle < 360)
+		point.x = ((init->px / CELL) * MINI_CEL) - MINI_W / 2;
+		index.x = 0;
+		while (index.x <= MINI_W && point.x / MINI_CEL < init->mw)
 		{
-			int x = centerX + radius * cos(circangle * M_PI / 180);
-			int y = centerY + radius * sin(circangle * M_PI / 180);
-       		
-			mlx_pixel_put(init->mlx, init->win, x, y, 0x0000);
-			mlx_pixel_put(init->mlx, init->win, x + 1, y, 0x0000);
-			mlx_pixel_put(init->mlx, init->win, x - 1, y, 0x0000);
-			mlx_pixel_put(init->mlx, init->win, x, y - 1, 0x0000);
-			mlx_pixel_put(init->mlx, init->win, x, y + 1, 0x0000);
-			mlx_pixel_put(init->mlx, init->win, x + 1, y + 1, 0x0000); 
-			mlx_pixel_put(init->mlx, init->win, x - 1, y - 1, 0x0000); 
-			circangle++;
+			if (inside_circle(index.x, index.y))
+				put_mmap(init, point, index);
+			point.x++;
+			index.x++;
 		}
-		radius++;
-    }
-
-
-	/**** draw_map_minmap Player ****/
-	int py = (mh / 2);
-	int px = (mw / 2);
-	
-	int yy;
-	int xx;
-
-	yy = py - 3;
-	while (yy < py + 3)
-	{
-		xx = px - 3;
-		while (xx < px + 3)
-		{
-			mlx_pixel_put(init->mlx, init->win, xx, yy, 0xFF0000);
-			xx++;
-		}
-		yy++;
+		point.y++;
+		index.y++;
 	}
-
+	draw_mmap_player(init);
 }

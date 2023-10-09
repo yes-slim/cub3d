@@ -12,12 +12,18 @@
 
 #include "../includes/cub3d.h"
 
-int	valid_form(char *arg, int j, int comma)
+bool	valid_form(char *arg, int j, int comma)
 {
-	return (comma > 2 || (arg[j] != ',' && ((arg[j] < '0' || arg[j] > '9') \
-						&& (!is_space(arg[j])))) || (arg[j] == ','\
-						&& (!arg[j + 1] || arg[j + 1] == ','\
-						|| arg[j + 1] == '\n')));
+	if (comma > 2)
+		return (false);
+	if (arg[j] != ',' && ((arg[j] < '0' || arg[j] > '9') \
+						&& (!is_space(arg[j]))))
+		return (false);
+	if ((arg[j] == ',' && (!arg[j + 1] || arg[j + 1] == ','\
+						|| arg[j + 1] == '\n' || (arg[j + 1] < '0'\
+						|| arg[j + 1] > '9'))))
+		return (false);
+	return (true);
 }
 
 int	convert_rgb(char *arg, int conver)
@@ -39,29 +45,24 @@ int	convert_rgb(char *arg, int conver)
 int	floor_ceiling_value(char *arg, int comma, int conver, int i)
 {
 	int	j;
-	int	value;
 	int	result;
 
 	j = i;
 	result = 0;
 	while (arg[j])
 	{
-		if (valid_form(arg, j, comma))
+		if (!valid_form(arg, j, comma))
 			return (-1);
 		j++;
 		if (arg[j] == ',' || !arg[j])
 		{
 			if (arg[j])
 			{
-				arg[j] = '\0';
+				arg[j++] = '\0';
 				comma++;
-				j++;
 			}
-			value = convert_rgb(&arg[i], conver);
-			if (value == -1)
+			if (pars_fc_value(arg, i, &conver, &result) == -1)
 				return (-1);
-			result += value;
-			conver -= 8;
 			i = j;
 		}
 	}
