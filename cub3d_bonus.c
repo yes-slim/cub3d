@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 21:20:00 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 21:36:33 by yes-slim         ###   ########.fr       */
+/*   Created: 2023/10/08 23:32:29 by yes-slim          #+#    #+#             */
+/*   Updated: 2023/10/09 20:41:43 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_hook(t_init *init)
 {
 	mlx_hook(init->win, 2, 1L << 0, key_pressed, init);
 	mlx_hook(init->win, 3, 1L << 1, key_release, init);
+	mlx_hook(init->win, 6, 1L << 0, mouse_process, init);
 	mlx_hook(init->win, 17, 0, ft_exit, init);
 }
 
@@ -30,7 +31,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_init(&init, &data);
-	init.bonus = 0;
+	init.bonus = 1;
+	init.mouse_pos = init.px;
 	draw_player(&init);
 	ft_hook(&init);
 	mlx_loop(init.mlx);

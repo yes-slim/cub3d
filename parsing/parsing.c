@@ -44,7 +44,8 @@ int	get_data(t_data *data, char *arg, int flag)
 		arg[len] = '\0';
 		len--;
 	}
-	if (len < 4 || ft_strcmp(&arg[len - 3], ".xpm" ))
+	if (len - 3 == 0 || arg[len - 4] == '/' \
+		|| ft_strcmp(&arg[len - 3], ".xpm"))
 	{
 		return (-1);
 	}

@@ -12,6 +12,15 @@
 
 #include "cub3d.h"
 
+bool	inside_circle(int x, int y)
+{
+	int	distance;
+
+	distance = sqrt((x - M_CEN_X) * (x - M_CEN_X) \
+				+ (y - M_CEN_Y) * (y - M_CEN_Y));
+	return (distance <= MINI_RAD);
+}
+
 void	trim_spaces(t_data *data)
 {
 	int	y;

@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:24:20 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/07 16:54:39 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:36:23 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,26 @@ t_img	*get_texture(t_init *init, double r_ang)
 {
 	if (init->inter == HORIZONTAL)
 	{
-		if (r_ang > get_rad(0) && r_ang < get_rad(180))
-			return (init->South);
+		if (sin(r_ang) < 0)
+			return (init->south);
 		else
-			return (init->North);
+			return (init->north);
 	}
 	else if (init->inter == VERTICAL)
 	{
-		if (r_ang < get_rad(90) && r_ang > get_rad(270))
-			return (init->East);
+		if (cos(r_ang) > 0)
+			return (init->east);
 		else
-			return (init->West);
+			return (init->west);
 	}
 	return (NULL);
 }
 
 int	get_texture_x(t_init *init, t_img *text)
 {
-	int x=0;
-	
+	int	x;
+
+	x = 0;
 	if (init->inter == HORIZONTAL)
 		x = init->inter_x;
 	if (init->inter == VERTICAL)
@@ -45,13 +46,12 @@ int	get_texture_x(t_init *init, t_img *text)
 	return (x);
 }
 
-int	get_texture_y(t_init *init, t_img *text, double distance, int y)
+int	get_texture_y(t_img *text, double distance, int y)
 {
-	int y_t;
-	int distancefromtop;
+	int	y_t;
+	int	distancefromtop;
 
-	(void)init;
-	distancefromtop = y + (distance/2) - (S_HEI/2) ;
+	distancefromtop = y + (distance / 2) - (S_HEI / 2);
 	y_t = distancefromtop / distance * text->img_h;
 	return (y_t);
 }

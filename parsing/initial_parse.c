@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/06 01:50:08 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:21:42 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	init_parsing_data(t_data *data)
 	while (i < 5)
 		data->textures[i++] = NULL;
 	data->len_map = 0;
-	data->F = -1;
-	data->C = -1;
+	data->f = -1;
+	data->c = -1;
 	data->map_h = 0;
 	data->map_w = 0;
 	return (VALID);

@@ -6,18 +6,24 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 00:21:02 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/06 01:50:17 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:22:10 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	valid_form(char *arg, int j, int comma)
+bool	valid_form(char *arg, int j, int comma)
 {
-	return (comma > 2 || (arg[j] != ',' && ((arg[j] < '0' || arg[j] > '9') \
-						&& (!is_space(arg[j])))) || (arg[j] == ','\
-						&& (!arg[j + 1] || arg[j + 1] == ','\
-						|| arg[j + 1] == '\n')));
+	if (comma > 2)
+		return (false);
+	if (arg[j] != ',' && ((arg[j] < '0' || arg[j] > '9') \
+						&& (!is_space(arg[j]))))
+		return (false);
+	if ((arg[j] == ',' && (!arg[j + 1] || arg[j + 1] == ','\
+						|| arg[j + 1] == '\n' || (arg[j + 1] < '0'\
+						|| arg[j + 1] > '9'))))
+		return (false);
+	return (true);
 }
 
 int	convert_rgb(char *arg, int conver)
@@ -39,29 +45,24 @@ int	convert_rgb(char *arg, int conver)
 int	floor_ceiling_value(char *arg, int comma, int conver, int i)
 {
 	int	j;
-	int	value;
 	int	result;
 
 	j = i;
 	result = 0;
 	while (arg[j])
 	{
-		if (valid_form(arg, j, comma))
+		if (!valid_form(arg, j, comma))
 			return (-1);
 		j++;
 		if (arg[j] == ',' || !arg[j])
 		{
 			if (arg[j])
 			{
-				arg[j] = '\0';
+				arg[j++] = '\0';
 				comma++;
-				j++;
 			}
-			value = convert_rgb(&arg[i], conver);
-			if (value == -1)
+			if (pars_fc_value(arg, i, &conver, &result) == -1)
 				return (-1);
-			result += value;
-			conver -= 8;
 			i = j;
 		}
 	}
@@ -82,9 +83,9 @@ int	get_floor_ceiling(t_data *data, char *arg, int flag)
 	if (value == -1)
 		return (-1);
 	if (flag == F)
-		data->F = value;
+		data->f = value;
 	else
-		data->C = value;
+		data->c = value;
 	return (1);
 }
 
@@ -110,9 +111,9 @@ int	check_arg(t_data *data, char *line)
 		return (get_data(data, &line[i + j], WE));
 	if (!ft_strcmp(&line[i], "EA") && !data->textures[EA])
 		return (get_data(data, &line[i + j], EA));
-	if (!ft_strcmp(&line[i], "F") && data->F == -1)
+	if (!ft_strcmp(&line[i], "F") && data->f == -1)
 		return (get_floor_ceiling(data, &line[i + j], F));
-	if (!ft_strcmp(&line[i], "C") && data->C == -1)
+	if (!ft_strcmp(&line[i], "C") && data->c == -1)
 		return (get_floor_ceiling(data, &line[i + j], C));
 	return (-1);
 }
