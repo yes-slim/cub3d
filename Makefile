@@ -6,17 +6,18 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/09 23:38:34 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/10 20:29:54 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 HEADER  	= -Iincludes
+HEADER_F	= includes/cub3d.h includes/parsing.h
 MLX			= -lmlx -framework OpenGL -framework AppKit
 SANITIZ		= #-fsanitize=address -g3
 CFLAGS 		= -Wall -Wextra -Werror $(SANITIZ) $(HEADER) 
-NAME    	= cub3d
-NAME_bonus  = cub3d_bonus
+NAME    	= cub3D
+NAME_bonus  = cub3D_bonus
 DEL     	= rm -rf
 #========================================================#
 MLX_F		= my_mlx_pixel_put get_pixel_color
@@ -41,12 +42,14 @@ OBJ     	= $(SRCS:.c=.o)
 #==========================rules==============================#
 all     : $(NAME)
 
-$(NAME) : $(OBJ) cub3d.c
+$(NAME) : $(OBJ) cub3d.c $(HEADER_F)
 		 @ar -rc cub3d.a $(OBJ)
 		 @cc cub3d.c $(CFLAGS) cub3d.a -o $(NAME) $(MLX)
 		 @echo $(green)$(bold)":::$(NAME) is ready:::"$(reset)
 
-bonus 	: $(OBJ) cub3d_bonus.c
+bonus 	: $(NAME_bonus)
+
+$(NAME_bonus):	$(OBJ) cub3D_bonus.c $(HEADER_F)
 		 @ar -rc cub3d.a $(OBJ)
 		 @cc cub3d_bonus.c $(CFLAGS) cub3d.a -o $(NAME_bonus) $(MLX)
 		 @echo $(green)$(bold)":::$(NAME_bonus) is ready:::"$(reset)
