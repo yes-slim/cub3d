@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:24:20 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/10 11:04:23 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:17:01 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	get_texture_y(t_img *text, double distance, int y)
 	int	distancefromtop;
 
 	distancefromtop = y + (distance / 2) - (S_HEI / 2);
-	y_t = distancefromtop * (text->img_h / distance);
+	y_t = distancefromtop * text->img_h / distance;
 	return (y_t);
 }
