@@ -6,7 +6,7 @@
 #    By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 20:51:44 by yes-slim          #+#    #+#              #
-#    Updated: 2023/10/10 20:29:54 by yes-slim         ###   ########.fr        #
+#    Updated: 2023/10/10 20:34:26 by yes-slim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ $(NAME) : $(OBJ) cub3d.c $(HEADER_F)
 
 bonus 	: $(NAME_bonus)
 
-$(NAME_bonus):	$(OBJ) cub3D_bonus.c $(HEADER_F)
+$(NAME_bonus) :	$(OBJ) cub3D_bonus.c $(HEADER_F)
 		 @ar -rc cub3d.a $(OBJ)
 		 @cc cub3d_bonus.c $(CFLAGS) cub3d.a -o $(NAME_bonus) $(MLX)
 		 @echo $(green)$(bold)":::$(NAME_bonus) is ready:::"$(reset)
