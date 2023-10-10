@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/10 12:52:18 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:16:51 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,53 +77,3 @@ void	draw_player(t_init *init)
 	if (init->bonus)
 		draw_map_minmap(init);
 }
-
-// 	draw_map(init);
-// 	mlx_pixel_put(init->mlx, init->win,
-// 	init->px/CELL*16, init->py/CELL*16, 0xFF0000);
-// 	mlx_pixel_put(init->mlx, init->win,
-// 	init->px/CELL*16+1, init->py/CELL*16, 0xFF0000);
-// 	mlx_pixel_put(init->mlx, init->win,
-// 	init->px/CELL*16, init->py/CELL*16+1, 0xFF0000);
-// 	mlx_pixel_put(init->mlx, init->win,
-// 	init->px/CELL*16+1, init->py/CELL*16+1, 0xFF0000);
-// void	draw_map(t_init *init)
-// {
-// 	int x=0, y=0;
-// 	while (init->map[y/16] && (init->mh*16)>= y)
-// 	{
-// 		x=0;
-// 		while (init->map[y/16][x/16] && (init->mw*16)>= x)
-// 		{
-// 			// if (!(x%16) || !(y%16))
-// 			// 	mlx_pixel_put(init->mlx, init->win, x, y, 0xFFFFFF);
-// 			if (init->map[y/16][x/16] == '0')
-// 				mlx_pixel_put(init->mlx, init->win, x, y, 0x878787);
-// 			else if (init->map[y/16][x/16] == '1')
-// 				mlx_pixel_put(init->mlx, init->win, x, y, 0xC09E06);		
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	double rot_a = get_rad((double)FOV / (double)(NUM_RAYS));
-// 	double rx=init->px/CELL*16, ry=init->py/CELL*16; 
-// 	int ray_nb=0;
-// 	while (ray_nb < NUM_RAYS)
-// 	{
-// 		rx=init->px/CELL*16, ry=init->py/CELL*16;
-// 		double rp1=(init->pa + get_rad(FOV/2)) - (rot_a * ray_nb);
-// 		if (init->pa-rot_a > 2*M_PI)
-// 			init->pa -= 2*M_PI;
-// 		if (init->pa+rot_a < 0)
-// 			init->pa += 2*M_PI;
-// 		while ((rx>0 && rx < init->mw*16) && (ry>0 && ry < init->mh*16))
-// 		{
-// 			if (init->map[(int)ry/16][(int)rx/16] != '0')
-// 				break;
-// 			mlx_pixel_put(init->mlx, init->win, rx, ry, 0x000000);
-// 			ry -= sin(rp1);
-// 			rx += cos(rp1);
-// 		}
-// 		ray_nb++;
-// 	}
-// }
