@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:18:19 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 23:06:23 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:33:32 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ double	dda_v(t_init *init, double ra)
 			ver_x += 2 * CELL;
 		ver_y = init->py - tan(ra) * (ver_x - init->px);
 	}
-	dis_v = sqrt((ver_x - init->px) * (ver_x - init->px)
-			+ (ver_y - init->py) * (ver_y - init->py));
+	dis_v = sqrt(pow((ver_x - init->px), 2) + pow((ver_y - init->py), 2));
 	init->inter_xv = ver_x;
 	init->inter_yv = ver_y;
 	return (dis_v);
@@ -59,8 +58,7 @@ double	dda_h(t_init *init, double ra)
 			hor_y -= 2 * CELL;
 		hor_x = init->px - ((hor_y - init->py) / tan(ra));
 	}
-	dis_h = sqrt((hor_x - init->px) * (hor_x - init->px)
-			+ (hor_y - init->py) * (hor_y - init->py));
+	dis_h = sqrt(pow((hor_x - init->px), 2) + pow((hor_y - init->py), 2));
 	init->inter_xh = hor_x;
 	init->inter_yh = hor_y;
 	return (dis_h);
@@ -90,6 +88,6 @@ double	dda(t_init *init, double ra)
 		init->inter = HORIZONTAL;
 	}
 	dis *= cos(init->pa - ra);
-	w_hei = (S_HEI * CELL) / dis;
+	w_hei = S_HEI * CELL / dis;
 	return (w_hei);
 }

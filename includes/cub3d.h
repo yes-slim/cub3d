@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:47:17 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 21:37:11 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:56:53 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ double	dda(t_init *init, double ra);
 
 /****textures****/
 t_img	*get_texture(t_init *init, double r_ang);
-int		get_texture_x(t_init *init, t_img *text);
+int		get_texture_x(t_init *init);
 int		get_texture_y(t_img *text, double distance, int y);
 
 /****drawing****/

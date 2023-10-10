@@ -1,10 +1,10 @@
-NO ./textures/img/metal_1.xpm
-SO ./textures/img/elevator.xpm
-WE ./textures/img/metal_2.xpm
-EA ./textures/img/metal_3.xpm
+NO ./textures/img/W_5.xpm
+SO ./textures/img/W_6.xpm
+WE ./textures/img/W_7.xpm
+EA ./textures/img/W_8.xpm
 
-F 255, 188, 98
-C 98, 179, 255
+C 194, 125, 111
+F 101, 154, 195
 
 1111111111111111111
 10W1001001001000001

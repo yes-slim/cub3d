@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:20:34 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 21:36:07 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:52:23 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_text_info(t_init *init, double r_ang, int y, double distance)
 	int		y_t;
 
 	current_tex = get_texture(init, r_ang);
-	x_t = get_texture_x(init, current_tex);
+	x_t = get_texture_x(init);
 	y_t = get_texture_y(current_tex, distance, y);
 	color = get_pixel_color(current_tex, x_t, y_t);
 	return (color);

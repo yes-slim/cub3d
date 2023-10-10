@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 02:24:20 by yes-slim          #+#    #+#             */
-/*   Updated: 2023/10/09 21:36:23 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:04:23 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_img	*get_texture(t_init *init, double r_ang)
 	return (NULL);
 }
 
-int	get_texture_x(t_init *init, t_img *text)
+int	get_texture_x(t_init *init)
 {
 	int	x;
 
@@ -41,8 +41,6 @@ int	get_texture_x(t_init *init, t_img *text)
 	if (init->inter == VERTICAL)
 		x = init->inter_y;
 	x %= CELL;
-	if (!text)
-	x = x * text->img_w / CELL;
 	return (x);
 }
 
@@ -52,6 +50,6 @@ int	get_texture_y(t_img *text, double distance, int y)
 	int	distancefromtop;
 
 	distancefromtop = y + (distance / 2) - (S_HEI / 2);
-	y_t = distancefromtop / distance * text->img_h;
+	y_t = distancefromtop * (text->img_h / distance);
 	return (y_t);
 }
