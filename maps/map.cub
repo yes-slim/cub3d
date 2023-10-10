@@ -4,8 +4,8 @@ WE ./textures/img/metal_2.xpm
 EA ./textures/img/metal_3.xpm
 
 
-F 255, 188, 98
-C 98, 179, 255
+C 255, 188, 98
+F 98, 179, 255
 
 
 1111111111111111111

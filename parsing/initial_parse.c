@@ -6,7 +6,7 @@
 /*   By: yes-slim <yes-slim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 23:36:05 by mberrouk          #+#    #+#             */
-/*   Updated: 2023/10/08 22:21:42 by yes-slim         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:58:09 by yes-slim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	init_pars(int ac, char *av[], t_data *data)
 	int		fd;
 	int		flag;
 
-	if (ac != 2 || ft_strcmp(&(av[1][ft_strlen(av[1]) - 4]), ".cub"))
+	if (ac != 2 || ft_strcmp(&(av[1][ft_strlen(av[1]) - 4]), ".cub")
+			|| !av[1][ft_strlen(av[1] - 5)])
 		return (print_errmsg("Usage: ./cub3D <your map>.cub"));
 	fd = open(av[1], O_RDONLY);
 	if (fd < 3)
